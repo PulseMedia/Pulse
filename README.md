@@ -4,6 +4,11 @@
 * 📁 JavaScript Api [(api/)](api/)
 * 📁 Platform-related Api [(platforms/)](platforms/)
 * 📁 Tools [(tools/)](tools/)
+
+Please note that not every part of the App & Platform-related code is OpenSource, we want to guarantee an safe and secure way to use the app.
+
+Have an Idea, Improvement or want to modify something of the closed source, open an "*issue*" - we will look into 
+
   
 ### Bugs
 Found a bug? - Please create an "*issue*" to solve and track the issue.
