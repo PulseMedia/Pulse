@@ -10,14 +10,10 @@ Currently the whole JavaScript part is created as one NPM-Package and currently 
  - browserApi.js
  - representations.js
   
-more infos below..
 
-### Language Specification
-All JavaScript contributions should follow the ECMAScript 2015 Language Specification.
-This is important to make the app available on a wide range of platforms.
-Newer Language Specification might not be available on all platforms
+___
 
-  
+
 ### #1 map.js
 This js-file contains the whole structure of the api, note that internal api functions are not inserted here and are added via an internal map
 
@@ -47,7 +43,11 @@ the "**FUNCTION_OBJECT**" is structed as follow:
    callback that is executed **after** the native/jsApi function is executed
    this can perfectly used to modify the return value
 
-  
+ 
+
+___
+
+ 
 ### #2 api.js
 This file contains the raw JavaScript api which is not dependent on any native platform function, and works out of the box in any web-browser
 
@@ -78,6 +78,10 @@ than the api.js file should contains the following:
 ```
 
   
+
+___
+
+
 ### #3 casts.js
 The casts.js file is an simpler system, if the function (in upperCase with underscores) is given in this object, the return value will be "casted" to the assigned class instead of returning value of the function
 
@@ -131,6 +135,10 @@ The main purpose of this system is to only allow functions that are available on
 Since some platforms deliver some different and extra functions, where some Addons that are using this functions will eventually not work on other platforms 
 
   
+
+___
+
+
 ### #5 representations.js
 The representations.js file is something similar than the casts.js file. The only difference here is that an class will be mapped to the whole `subCategory`. The whole `subCategory` can than be used as an class
 
