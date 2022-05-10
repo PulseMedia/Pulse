@@ -4,11 +4,11 @@
 The JavaScript part contains various parts of the app from an pure JavaScript Api up to mapped Native Functions  
 Currently the whole JavaScript part is created as one NPM-Package and currently contains **5** important parts of the App
 
- - map.js
- - api.js
- - casts.js
- - browserApi.js
- - representations.js
+ - `map.js`
+ - `api.js`
+ - `casts.js`
+ - `browserApi.js`
+ - `representations.js`
   
 
 ___
@@ -73,6 +73,8 @@ This file contains the raw JavaScript api which is not dependent on any native p
 The Object returned in this file is basically the same as the map file above with the difference that the function should already be in the correct case (LowerCamelCase).  
 Example: If function is `TEST_FUNCTION` in the map.js file in should be `testFunction` here  
 Instead of an "**FUNCTION_OBJECT**" an real JavaScript function should be inserted here.  
+
+If you want to add an **Native Function** see the section below...
 
 ##### Example:
 map.js:
@@ -147,6 +149,10 @@ myText.testFunc() //returns: "dlroW olleH, what?"
 It basically makes no sense to cast an `reverseString` function to an Class, this is just an example
 
   
+
+___
+
+
 ### #4 browserApi.js
 By default all global functions are removed from the global "window"-object.  
 All functions that are inserted in this array that will returned in this file will be available and doesnt gets removed from the global object.  
@@ -204,4 +210,13 @@ var myText = MAINCATEGORY.subCategory("Hello World");
 
 myText.reverse() //returns: "dlroW olleH"
 ```
-This is also useless and no real-world useage, but is an good example how the system works  
+This is also useless and no real-world useage, but is an good example how the system works 
+
+  
+
+___
+
+
+### Native Function
+Read the [Platforms-Readme](../platforms) file how you can add or modify an function and how the "Promise"-like System works which is required for native functions
+
