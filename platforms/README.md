@@ -12,7 +12,7 @@ ___
 
 
 ### Add or Modify an Native function
-If you want to Add or Modify an Native function make sure to add it to the map.js file mentioned in the  [JavaScript-Readme](../api) file  
+If you want to Add or Modify an Native function make sure to add it to the map.js file mentioned in the [JavaScript-Readme](../api) file  
 After the function is added to the map.js file add it to the platform (see Platforms above)  
 Each platform has his own ReadMe where and how you can add or modify an function  
 Please note that each native platform function uses an "Promise"-like System (see below)  
