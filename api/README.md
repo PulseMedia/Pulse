@@ -50,14 +50,14 @@ map.js:
     "subCategory": {
       "REVERSE_STRING": {
         args: [ "STRING" ],
-		before: (args) => {
-			//...
-			return args;
-		},
-		after: (val) => {
-			//...
-			return val;
-		}
+        before: (args) => {
+          //...
+          return args;
+        },
+        after: (val) => {
+          //...
+          return val;
+        }
       }
     }
   }
