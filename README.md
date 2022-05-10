@@ -1,6 +1,6 @@
 # Pulse
 **This repository includes the following development content for Pulse*
-* 📁 Development Documentation [(docs/)](docs/)
+* 📁 Development Documentation [(site)](https://pulsemedia.github.io/Pulse/) [(docs/)](docs/)
 * 📁 JavaScript Api [(api/)](api/)
 * 📁 Platform-related Api [(platforms/)](platforms/)
 * 📁 Tools [(tools/)](tools/)
