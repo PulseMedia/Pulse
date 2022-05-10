@@ -43,6 +43,25 @@ the "**FUNCTION_OBJECT**" is structed as follow:
    callback that is executed **after** the native/jsApi function is executed
    this can perfectly used to modify the return value
 
+##### Example:
+map.js:
+```javascript
+"MAINCATEGORY": {
+    "subCategory": {
+      "REVERSE_STRING": {
+        args: [ "STRING" ],
+		before: (args) => {
+			//...
+			return args;
+		},
+		after: (val) => {
+			//...
+			return val;
+		}
+      }
+    }
+  }
+```
  
 
 ___
