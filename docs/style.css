@@ -171,7 +171,7 @@ li input[type='checkbox'] {
   right: 0;
   text-decoration: none;
   top: 0;
-  z-index: 1;
+  z-index: 99;
 }
 .github-corner:hover .octo-arm {
   -webkit-animation: octocat-wave 560ms ease-in-out;
@@ -913,6 +913,11 @@ input[type='search'] {
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 20px;
+  user-select: none;
+}
+
+.sidebar *{
+  user-select: none !important;
 }
 
 .sidebar-nav{
@@ -954,12 +959,34 @@ input[type='search'] {
 }
 
 .sidebar ul li{
-  border-radius: 5px;
-  padding: 3px 13px;
 }
 
-.sidebar ul li a{
+.sidebar ul li a, .sidebar ul li.folder{
   font-size: 16px;
+  padding: 3px 13px;
+  border-radius: 5px;
+}
+
+.sidebar ul li.folder a{
+  font-weight: 400;
+}
+
+.sidebar ul li.folder .active a{
+  font-weight: 700;
+}
+
+.sidebar ul li.folder{
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.sidebar ul li.folder > a {
+  border-radius: 0;
+  padding: 0;
+}
+
+.sidebar ul li.folder:hover > a {
+  background: none !important;
 }
 
 a:hover{
@@ -967,8 +994,17 @@ a:hover{
 }
 
 .sidebar ul li:hover{
+  text-decoration: none !important;
+}
+
+.sidebar ul li a:hover, .sidebar ul li.folder:hover{
   background: rgba(255,255,255,0.05);
   text-decoration: none !important;
+}
+
+
+.sidebar ul li.folder.open:hover{
+  background: none !important;
 }
 
 .markdown-section strong {
@@ -1221,4 +1257,30 @@ tr td a.TOCClassConstructor{
 
 tr td a.TOCClassFunc.property{
   color: #cfaf4e;
+}
+
+.sidebar-nav li{
+    position:relative;
+    margin:0;
+    cursor:pointer;
+    user-select: none;
+}
+.sidebar-nav ul:not(.app-sub-sidebar)>li:not(.file)::before{
+    content:'';
+    display:block;
+    position:absolute;
+    top:14px;
+    right:15px;
+    height:6px;
+    width:6px;
+    border-right:2px solid #8f96a3;
+    border-bottom:2px solid #8f96a3;
+    transform:rotate(-45deg);
+}
+.sidebar-nav ul:not(.app-sub-sidebar)>li.open::before{
+    transform: rotate(45deg);
+    border-color: #6794e0;
+}
+.sidebar-nav ul:not(.app-sub-sidebar)>li.collapse::before{
+    transform: rotate(-45deg)
 }

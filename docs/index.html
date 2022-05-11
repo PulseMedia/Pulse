@@ -75,9 +75,12 @@
 
   window.$docsify = {
     name: 'Pulse Documentation',
-    repo: 'https://github.com/PulseMedia/Pulse',
+    repo: 'PulseMedia/Pulse',
+    homepage: "index.md",
     loadSidebar: true,
     subMaxLevel: 0,
+    auto2top: true,
+	  sidebarDisplayLevel: 1,
     plugins: [
       function(hook, vm) {
         hook.init(function() {
@@ -208,5 +211,6 @@
   </script>
 
   <script src="docsify.js"></script>
+  <script src="sidebar-collapse.min.js"></script>
 </body>
 </html>

@@ -19,10 +19,10 @@ ___
  - **What can i Contribute to the JavaScript part?**  
    Basically everything that is relevant and improves the api  
  - **How do i add a new JavaScript function to the api?**  
-   1. Add the function the map.js file  
+   1. Add the function to the map.js file  
    2. Add the function reference to the api.js file  
  - **How do i add a new Native function to the api?**  
-   1. Add the function the map.js file  
+   1. Add the function to the map.js file  
    2. Add the function to the platform mentioned in the the [Platform-Readme](../platforms) file  
    3. If Possible add the Function to ALL platforms to make it supported on all platforms  
  - **Why are some api functions not in the map.js and the api.js file**  
