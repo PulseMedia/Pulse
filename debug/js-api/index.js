@@ -203,6 +203,12 @@ function valueEquals(one, two){
         } else {
 
           if(!(functionName in debugMap[mainCategory][subCategory])){
+            if(!(functionName in pulseApi.map[mainCategory][subCategory])){
+              Display(`    ❌ <span style='color: #e81e30'>${func}</span> <span style="font-size: 14px; margin-left: 3px; color: #8f8c8d;">(...)</span>`);
+              Display(`        -  <span style="font-size: 14px; color: #fc7474;">Missing api map data</span><br/>`);
+              continue;
+            }
+
             let hasAfter = pulseApi.map[mainCategory][subCategory][functionName].after != undefined;
             let hasBefore = pulseApi.map[mainCategory][subCategory][functionName].before != undefined;
             if(pulseApi.api[mainCategory][subCategory][func] === "UNSUPPORTED"){
