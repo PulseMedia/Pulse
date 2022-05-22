@@ -1,7 +1,29 @@
 import pulseApi from "pulse-javascript";
-import { createDisplay } from "./display.js";
 import { registerDebugGlobals } from "./debugGlobals.js";
 import { debugMap } from "./debugMap.js";
+
+
+let pre = document.createElement('pre');
+let code = document.createElement('code');
+pre.appendChild(code);
+document.body.appendChild(pre);
+
+window.NativeCheck = (window.location.hash.replace("#", "").trim().toUpperCase() == "NATIVE");
+window.Displays = {};
+
+function renderDisplay(object){
+  let s = (typeof object === 'string') ? object : JSON.stringify(object);
+  let span = document.createElement('span');
+  span.innerHTML = s + "<!--- --->";
+  span.appendChild(document.createTextNode('\n'));
+  code.appendChild(span);
+}
+
+renderDisplay("====================================================");
+renderDisplay("PULSE DEBUG: js-api");
+renderDisplay("Test will be executed in the following Enviornment:");
+renderDisplay(navigator.userAgent);
+renderDisplay("====================================================");
 
 fillNativeApifunctions();
 
@@ -12,13 +34,27 @@ const DEBUG_GLOBALS = {
 }
 
 registerDebugGlobals(DEBUG_GLOBALS);
-var Display = createDisplay();
 
-Display("====================================================");
-Display("PULSE DEBUG: js-api");
-Display("Test will be executed in the following Enviornment:");
-Display(navigator.userAgent);
-Display("====================================================");
+
+function createDisplay(content = ""){
+  let span = document.createElement('span');
+  span.innerHTML = content + "<!--- --->";
+  span.appendChild(document.createTextNode('\n'));
+  code.appendChild(span);
+  return span;
+}
+//very ugly implementation lol :D
+function updateDisplay(key, content, append = true){
+  if(key in Displays){
+    if(append){
+      Displays[key].innerHTML = Displays[key].innerHTML + content + "<!--- --->";
+      Displays[key].appendChild(document.createTextNode('\n'));
+    } else {
+      Displays[key].innerHTML = content + "<!--- --->";
+      Displays[key].appendChild(document.createTextNode('\n'));
+    }
+  }
+}
 
 export function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -98,21 +134,15 @@ function valueEquals(one, two){
 
   for(var mainCategory in pulseApi.api){
     if(!(mainCategory in debugMap)){
-      Display("> " + mainCategory + " [Missing in DebugMap]");
       continue;
-    } else {
-      Display(`> <span style='color: #2b89ed'>${mainCategory}</span>`);
     }
     for(var subCategory in pulseApi.api[mainCategory]){
       if(!(subCategory in debugMap[mainCategory])){
-        Display("  - " + subCategory + " [Missing in DebugMap]");
         continue;
-      } else {
-        Display(`  - <span style='color: #2bc6ed'>${subCategory}</span>`);
       }
       for(var func in pulseApi.api[mainCategory][subCategory]){
         let functionName = toLowerCamelCaseFromLow(func);
-
+        let updateKey = `${mainCategory}.${subCategory}.${functionName}`;
         if(isClass(pulseApi.api[mainCategory][subCategory][func])){
           let errors = [];
           let count = 0;
@@ -173,60 +203,63 @@ function valueEquals(one, two){
             }
           });
           if(errors.length > 0){
-            Display(`    ❌ <span style='color: #e81e30'>${func}</span> <span style='color: #e3b129; font-weight: 700; font-size: 14px;'>CLASS</span> <span style="font-size: 14px; margin-left: 3px; color: #8f8c8d;">(${count  - errors.length}/${count} class tests passed)</span>`);
+            updateDisplay(updateKey, `    ❌ <span style='color: #e81e30'>${func}</span> <span style='color: #e3b129; font-weight: 700; font-size: 14px;'>CLASS</span> <span style="font-size: 14px; margin-left: 3px; color: #8f8c8d;">(${count  - errors.length}/${count} class tests passed)</span>`, false);
             errors.forEach((item, i) => {
                 switch (item.type) {
                   case "CONSTRUCTOR":
                   case "CALL":
-                    Display(`        -  <span style="font-size: 14px; color: #fc7474;">Class Test "${item.id + 1}" results in:</span>`);
-                    Display(`              <span style="font-size: 14px; color: #fc7474; font-weight: 700;">${item.error.name}:</span>`);
-                    Display(`              <span style="font-size: 14px; color: #fc7474;">${item.error.message}</span><br/>`);
+                    updateDisplay(updateKey, `        -  <span style="font-size: 14px; color: #fc7474;">Class Test "${item.id + 1}" results in:</span>`);
+                    updateDisplay(updateKey, `              <span style="font-size: 14px; color: #fc7474; font-weight: 700;">${item.error.name}:</span>`);
+                    updateDisplay(updateKey, `              <span style="font-size: 14px; color: #fc7474;">${item.error.message}</span><br/>`);
                     break;
                   case "WRONGVALUE":
-                    Display(`        -  <span style="font-size: 14px; color: #fc7474;">Class Test "${item.id + 1}" (${item.callee}) returns:</span>`);
-                    Display(`              <span style="font-size: 14px; color: #fc7474;">${item.got} <span style="color: #ba3c3c;">(${typeof item.got})</span></span>`);
-                    Display(`           <span style="font-size: 14px; color: #fc7474;">But expected the following value:</span>`);
-                    Display(`              <span style="font-size: 14px; color: #fc7474;">${item.should} <span style="color: #ba3c3c;">(${typeof item.should})</span></span><br/>`);
+                    updateDisplay(updateKey, `        -  <span style="font-size: 14px; color: #fc7474;">Class Test "${item.id + 1}" (${item.callee}) returns:</span>`);
+                    updateDisplay(updateKey, `              <span style="font-size: 14px; color: #fc7474;">${item.got} <span style="color: #ba3c3c;">(${typeof item.got})</span></span>`);
+                    updateDisplay(updateKey, `           <span style="font-size: 14px; color: #fc7474;">But expected the following value:</span>`);
+                    updateDisplay(updateKey, `              <span style="font-size: 14px; color: #fc7474;">${item.should} <span style="color: #ba3c3c;">(${typeof item.should})</span></span><br/>`);
                     break;
                   case "RAW":
-                    Display(`        -  <span style="font-size: 14px; color: #fc7474;">Class Test "${item.id + 1}" results in:</span>`);
-                    Display(`              <span style="font-size: 14px; color: #fc7474; font-weight: 700;">${item.name}:</span>`);
-                    Display(`              <span style="font-size: 14px; color: #fc7474;">${item.message}</span><br/>`);
+                    updateDisplay(updateKey, `        -  <span style="font-size: 14px; color: #fc7474;">Class Test "${item.id + 1}" results in:</span>`);
+                    updateDisplay(updateKey, `              <span style="font-size: 14px; color: #fc7474; font-weight: 700;">${item.name}:</span>`);
+                    updateDisplay(updateKey, `              <span style="font-size: 14px; color: #fc7474;">${item.message}</span><br/>`);
                     break;
 
                 }
             });
 
           } else {
-            Display(`    ✔️ <span style='color: #3ff25d'>${func}</span> <span style='color: #e3b129; font-weight: 700; font-size: 14px;'>CLASS</span> <span style="font-size: 14px; margin-left: 3px; color: #8f8c8d;">(${count  - errors.length}/${count} class tests passed)</span>`);
+            updateDisplay(updateKey, `    ✔️ <span style='color: #3ff25d'>${func}</span> <span style='color: #e3b129; font-weight: 700; font-size: 14px;'>CLASS</span> <span style="font-size: 14px; margin-left: 3px; color: #8f8c8d;">(${count  - errors.length}/${count} class tests passed)</span>`, false);
           }
         } else {
 
           if(!(functionName in debugMap[mainCategory][subCategory])){
             if(!(functionName in pulseApi.map[mainCategory][subCategory])){
-              Display(`    ❌ <span style='color: #e81e30'>${func}</span> <span style="font-size: 14px; margin-left: 3px; color: #8f8c8d;">(...)</span>`);
-              Display(`        -  <span style="font-size: 14px; color: #fc7474;">Missing api map data</span><br/>`);
+              updateDisplay(updateKey, `    ❌ <span style='color: #e81e30'>${func}</span> <span style="font-size: 14px; margin-left: 3px; color: #8f8c8d;">(...)</span>`, false);
+              updateDisplay(updateKey, `        -  <span style="font-size: 14px; color: #fc7474;">Missing api map data</span><br/>`);
               continue;
             }
 
             let hasAfter = pulseApi.map[mainCategory][subCategory][functionName].after != undefined;
             let hasBefore = pulseApi.map[mainCategory][subCategory][functionName].before != undefined;
             if(pulseApi.api[mainCategory][subCategory][func] === "UNSUPPORTED"){
-              Display(`    ❌ <span style='color: #e81e30'>${func}</span> <span style='color: #da7af0; font-weight: 700; font-size: 14px;'>?Native?</span> <span style="font-size: 14px; margin-left: 3px; color: #8f8c8d;">${hasBefore ? " (+before)" : ""}${hasAfter ? " (+after)" : ""}(...)</span>`);
-              Display(`        -  <span style="font-size: 14px; color: #fc7474;">Missing debug data</span><br/>`);
+              updateDisplay(updateKey, `    ❌ <span style='color: #e81e30'>${func}</span> <span style='color: #da7af0; font-weight: 700; font-size: 14px;'>?Native?</span> <span style="font-size: 14px; margin-left: 3px; color: #8f8c8d;">${hasBefore ? " (+before)" : ""}${hasAfter ? " (+after)" : ""}(...)</span>`, false);
+              updateDisplay(updateKey, `        -  <span style="font-size: 14px; color: #fc7474;">Missing debug data</span><br/>`);
             } else {
-              Display(`    ❌ <span style='color: #e81e30'>${func}</span> <span style="font-size: 14px; margin-left: 3px; color: #8f8c8d;">${hasBefore ? " (+before)" : ""}${hasAfter ? " (+after)" : ""}(...)</span>`);
-              Display(`        -  <span style="font-size: 14px; color: #fc7474;">Missing debug data</span><br/>`);
+              updateDisplay(updateKey, `    ❌ <span style='color: #e81e30'>${func}</span> <span style="font-size: 14px; margin-left: 3px; color: #8f8c8d;">${hasBefore ? " (+before)" : ""}${hasAfter ? " (+after)" : ""}(...)</span>`, false);
+              updateDisplay(updateKey, `        -  <span style="font-size: 14px; color: #fc7474;">Missing debug data</span><br/>`);
 
             }
 
           } else {
 
             if(pulseApi.api[mainCategory][subCategory][func] === "CALLONLY"){
-              Display(`    ✔️ <span style='color: #3ff25d'>${func}</span> <span style='color: #aa2af5; font-weight: 700; font-size: 14px;'>NATIVE CALL</span>`);
+              if(window.NativeCheck == true){ continue; }
+              //Check was executed without exception
+              updateDisplay(updateKey, `    ✔️ <span style='color: #3ff25d'>${func}</span> <span style='color: #aa2af5; font-weight: 700; font-size: 14px;'>NATIVE CALL</span>`, false);
               continue;
             }
             if(pulseApi.api[mainCategory][subCategory][func].native === true){
+              if(window.NativeCheck == true){ continue; }
               let errorsB = [];
               let countB = 0;
 
@@ -314,24 +347,24 @@ function valueEquals(one, two){
                 }
               });
               if(errorsB.length > 0 || errorsA.length > 0){
-                Display(`    ❌ <span style='color: #e81e30'>${func}</span> <span style='color: #aa2af5; font-weight: 700; font-size: 14px;'>NATIVE</span> <span style="font-size: 14px; margin-left: 3px; color: #8f8c8d;">${hasBefore ? " (+before)" : ""}${hasAfter ? " (+after)" : ""} (${countB  - errorsB.length}/${countB} before tests passed) (${countA  - errorsA.length}/${countA} after tests passed)</span>`);
+                updateDisplay(updateKey, `    ❌ <span style='color: #e81e30'>${func}</span> <span style='color: #aa2af5; font-weight: 700; font-size: 14px;'>NATIVE</span> <span style="font-size: 14px; margin-left: 3px; color: #8f8c8d;">${hasBefore ? " (+before)" : ""}${hasAfter ? " (+after)" : ""} (${countB  - errorsB.length}/${countB} before tests passed) (${countA  - errorsA.length}/${countA} after tests passed)</span>`, false);
                 errorsB.forEach((item, i) => {
                   switch (item.type) {
                     case "RAW":
-                      Display(`        -  <span style="font-size: 14px; color: #fc7474;">'Before' Test "${item.id + 1}" results in:</span>`);
-                      Display(`              <span style="font-size: 14px; color: #fc7474; font-weight: 700;">${item.name}:</span>`);
-                      Display(`              <span style="font-size: 14px; color: #fc7474;">${item.message}</span><br/>`);
+                      updateDisplay(updateKey, `        -  <span style="font-size: 14px; color: #fc7474;">'Before' Test "${item.id + 1}" results in:</span>`);
+                      updateDisplay(updateKey, `              <span style="font-size: 14px; color: #fc7474; font-weight: 700;">${item.name}:</span>`);
+                      updateDisplay(updateKey, `              <span style="font-size: 14px; color: #fc7474;">${item.message}</span><br/>`);
                       break;
                     case "WRONGBEFORE":
-                      Display(`        -  <span style="font-size: 14px; color: #fc7474;">'Before' Test "${item.id + 1}" returns:</span>`);
-                      Display(`              <span style="font-size: 14px; color: #fc7474;">${item.got} <span style="color: #ba3c3c;">(${typeof item.got})</span></span>`);
-                      Display(`           <span style="font-size: 14px; color: #fc7474;">But expected the following value:</span>`);
-                      Display(`              <span style="font-size: 14px; color: #fc7474;">${item.should} <span style="color: #ba3c3c;">(${typeof item.should})</span></span><br/>`);
+                      updateDisplay(updateKey, `        -  <span style="font-size: 14px; color: #fc7474;">'Before' Test "${item.id + 1}" returns:</span>`);
+                      updateDisplay(updateKey, `              <span style="font-size: 14px; color: #fc7474;">${item.got} <span style="color: #ba3c3c;">(${typeof item.got})</span></span>`);
+                      updateDisplay(updateKey, `           <span style="font-size: 14px; color: #fc7474;">But expected the following value:</span>`);
+                      updateDisplay(updateKey, `              <span style="font-size: 14px; color: #fc7474;">${item.should} <span style="color: #ba3c3c;">(${typeof item.should})</span></span><br/>`);
                       break;
                     case "CALL":
-                      Display(`        -  <span style="font-size: 14px; color: #fc7474;">'Before' Test "${item.id + 1}" results in:</span>`);
-                      Display(`              <span style="font-size: 14px; color: #fc7474; font-weight: 700;">${item.error.name}:</span>`);
-                      Display(`              <span style="font-size: 14px; color: #fc7474;">${item.error.message}</span><br/>`);
+                      updateDisplay(updateKey, `        -  <span style="font-size: 14px; color: #fc7474;">'Before' Test "${item.id + 1}" results in:</span>`);
+                      updateDisplay(updateKey, `              <span style="font-size: 14px; color: #fc7474; font-weight: 700;">${item.error.name}:</span>`);
+                      updateDisplay(updateKey, `              <span style="font-size: 14px; color: #fc7474;">${item.error.message}</span><br/>`);
                       break;
                     default:
                       break;
@@ -340,20 +373,20 @@ function valueEquals(one, two){
                 errorsA.forEach((item, i) => {
                   switch (item.type) {
                     case "RAW":
-                      Display(`        -  <span style="font-size: 14px; color: #fc7474;">'After' Test "${item.id + 1}" results in:</span>`);
-                      Display(`              <span style="font-size: 14px; color: #fc7474; font-weight: 700;">${item.name}:</span>`);
-                      Display(`              <span style="font-size: 14px; color: #fc7474;">${item.message}</span><br/>`);
+                      updateDisplay(updateKey, `        -  <span style="font-size: 14px; color: #fc7474;">'After' Test "${item.id + 1}" results in:</span>`);
+                      updateDisplay(updateKey, `              <span style="font-size: 14px; color: #fc7474; font-weight: 700;">${item.name}:</span>`);
+                      updateDisplay(updateKey, `              <span style="font-size: 14px; color: #fc7474;">${item.message}</span><br/>`);
                       break;
                     case "WRONGAFTER":
-                      Display(`        -  <span style="font-size: 14px; color: #fc7474;">'After' Test "${item.id + 1}" returns:</span>`);
-                      Display(`              <span style="font-size: 14px; color: #fc7474;">${item.got} <span style="color: #ba3c3c;">(${typeof item.got})</span></span>`);
-                      Display(`           <span style="font-size: 14px; color: #fc7474;">But expected the following value:</span>`);
-                      Display(`              <span style="font-size: 14px; color: #fc7474;">${item.should} <span style="color: #ba3c3c;">(${typeof item.should})</span></span><br/>`);
+                      updateDisplay(updateKey, `        -  <span style="font-size: 14px; color: #fc7474;">'After' Test "${item.id + 1}" returns:</span>`);
+                      updateDisplay(updateKey, `              <span style="font-size: 14px; color: #fc7474;">${item.got} <span style="color: #ba3c3c;">(${typeof item.got})</span></span>`);
+                      updateDisplay(updateKey, `           <span style="font-size: 14px; color: #fc7474;">But expected the following value:</span>`);
+                      updateDisplay(updateKey, `              <span style="font-size: 14px; color: #fc7474;">${item.should} <span style="color: #ba3c3c;">(${typeof item.should})</span></span><br/>`);
                       break;
                     case "CALL":
-                      Display(`        -  <span style="font-size: 14px; color: #fc7474;">'After' Test "${item.id + 1}" results in:</span>`);
-                      Display(`              <span style="font-size: 14px; color: #fc7474; font-weight: 700;">${item.error.name}:</span>`);
-                      Display(`              <span style="font-size: 14px; color: #fc7474;">${item.error.message}</span><br/>`);
+                      updateDisplay(updateKey, `        -  <span style="font-size: 14px; color: #fc7474;">'After' Test "${item.id + 1}" results in:</span>`);
+                      updateDisplay(updateKey, `              <span style="font-size: 14px; color: #fc7474; font-weight: 700;">${item.error.name}:</span>`);
+                      updateDisplay(updateKey, `              <span style="font-size: 14px; color: #fc7474;">${item.error.message}</span><br/>`);
                       break;
                     default:
                       break;
@@ -361,7 +394,7 @@ function valueEquals(one, two){
                 });
 
               } else {
-                Display(`    ✔️ <span style='color: #3ff25d'>${func}</span> <span style='color: #aa2af5; font-weight: 700; font-size: 14px;'>NATIVE</span> <span style="font-size: 14px; margin-left: 3px; color: #8f8c8d;">${hasBefore ? " (+before)" : ""}${hasAfter ? " (+after)" : ""} (${countB}/${countB} before tests passed) (${countA}/${countA} after tests passed)</span>`);
+                updateDisplay(updateKey, `    ✔️ <span style='color: #3ff25d'>${func}</span> <span style='color: #aa2af5; font-weight: 700; font-size: 14px;'>NATIVE</span> <span style="font-size: 14px; margin-left: 3px; color: #8f8c8d;">${hasBefore ? " (+before)" : ""}${hasAfter ? " (+after)" : ""} (${countB}/${countB} before tests passed) (${countA}/${countA} after tests passed)</span>`, false);
               }
               continue;
             }
@@ -388,31 +421,29 @@ function valueEquals(one, two){
             let hasAfter = pulseApi.map[mainCategory][subCategory][functionName].after != undefined;
             let hasBefore = pulseApi.map[mainCategory][subCategory][functionName].before != undefined;
             if(errors.length > 0){
-              Display(`    ❌ <span style='color: #e81e30'>${func}</span> <span style="font-size: 14px; margin-left: 3px; color: #8f8c8d;">${hasBefore ? " (+before)" : ""}${hasAfter ? " (+after)" : ""} (${count - errors.length}/${count} full tests passed)</span>`);
+              updateDisplay(updateKey, `    ❌ <span style='color: #e81e30'>${func}</span> <span style="font-size: 14px; margin-left: 3px; color: #8f8c8d;">${hasBefore ? " (+before)" : ""}${hasAfter ? " (+after)" : ""} (${count - errors.length}/${count} full tests passed)</span>`, false);
               errors.forEach((item, i) => {
                 switch (item.type) {
                   case "CALL":
-                    Display(`        -  <span style="font-size: 14px; color: #fc7474;">Test "${item.id + 1}" results in:</span>`);
-                    Display(`              <span style="font-size: 14px; color: #fc7474; font-weight: 700;">${item.error.name}:</span>`);
-                    Display(`              <span style="font-size: 14px; color: #fc7474;">${item.error.message}</span><br/>`);
+                    updateDisplay(updateKey, `        -  <span style="font-size: 14px; color: #fc7474;">Test "${item.id + 1}" results in:</span>`);
+                    updateDisplay(updateKey, `              <span style="font-size: 14px; color: #fc7474; font-weight: 700;">${item.error.name}:</span>`);
+                    updateDisplay(updateKey, `              <span style="font-size: 14px; color: #fc7474;">${item.error.message}</span><br/>`);
                     break;
                   case "RETURN":
-                    Display(`        -  <span style="font-size: 14px; color: #fc7474;">Test "${item.id + 1}" returns:</span>`);
-                    Display(`              <span style="font-size: 14px; color: #fc7474;">${item.got} <span style="color: #ba3c3c;">(${typeof item.got})</span></span>`);
-                    Display(`           <span style="font-size: 14px; color: #fc7474;">But expected the following value:</span>`);
-                    Display(`              <span style="font-size: 14px; color: #fc7474;">${item.should} <span style="color: #ba3c3c;">(${typeof item.should})</span></span><br/>`);
+                    updateDisplay(updateKey, `        -  <span style="font-size: 14px; color: #fc7474;">Test "${item.id + 1}" returns:</span>`);
+                    updateDisplay(updateKey, `              <span style="font-size: 14px; color: #fc7474;">${item.got} <span style="color: #ba3c3c;">(${typeof item.got})</span></span>`);
+                    updateDisplay(updateKey, `           <span style="font-size: 14px; color: #fc7474;">But expected the following value:</span>`);
+                    updateDisplay(updateKey, `              <span style="font-size: 14px; color: #fc7474;">${item.should} <span style="color: #ba3c3c;">(${typeof item.should})</span></span><br/>`);
                     break;
                   default:
                     break;
                 }
               });
             } else {
-              Display(`    ✔️ <span style='color: #3ff25d'>${func}</span> <span style="font-size: 14px; margin-left: 3px; color: #8f8c8d;">${hasBefore ? " (+before)" : ""}${hasAfter ? " (+after)" : ""} (${count}/${count} full tests passed)</span>`);
+              updateDisplay(updateKey, `    ✔️ <span style='color: #3ff25d'>${func}</span> <span style="font-size: 14px; margin-left: 3px; color: #8f8c8d;">${hasBefore ? " (+before)" : ""}${hasAfter ? " (+after)" : ""} (${count}/${count} full tests passed)</span>`, false);
             }
           }
         }
-
-        //if(functionName in pulseApi.map[mainCategory][subCategory]){ Display("YES"); } else { Display("NO") }
       }
     }
   }
@@ -428,6 +459,7 @@ function fillNativeApifunctions(){
     if(!(key in debugMap)){
       debugMap[key] = {};
     }
+    Displays[key] = createDisplay(`> <span style='color: #2b89ed'>${key}</span>`);
     for(var sub in pulseApi.map[key]){
       if(!(sub in newApi[key])){
         newApi[key][sub] = {};
@@ -435,8 +467,9 @@ function fillNativeApifunctions(){
       if(!(sub in debugMap[key])){
         debugMap[key][sub] = {};
       }
+      Displays[key + "." + sub] = createDisplay(`  - <span style='color: #2bc6ed'>${sub}</span>`);
       for(var func in pulseApi.map[key][sub]){
-
+        Displays[key + "." + sub + "." + func] = createDisplay(`    <span class='loader'></span>  <span style='color: #82aaf5; opacity: 0.75;'>${toLowerCamelCase(func)}</span>`);
         if(capitalizeFirstLetter(toLowerCamelCase(func)) in newApi[key][sub]){
           continue;
         }

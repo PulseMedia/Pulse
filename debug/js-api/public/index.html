@@ -10,12 +10,30 @@
         color: white;
       }
       pre code {
-        font: 18px Monospace;
+        font: 18px Consolas, Menlo, Monaco, monospace;
       }
-      .debug { color: Snow; }
-      .info  { color: LawnGreen; }
-      .warn  { color: GoldenRod; }
-      .error { color: LightCoral; }
+      .root{
+        display: flex;
+        flex-direction: column;
+      }
+      .loader {
+        color: #82aaf5;
+        font-family: Consolas, Menlo, Monaco, monospace;
+        font-weight: bold;
+        font-size: 20px;
+        opacity: 0.8;
+      }
+      .loader:after {
+        content: "</>";
+        display: inline-block;
+        animation: pulse 0.2s alternate infinite ease-in-out;
+      }
+      @keyframes pulse {
+        to {
+          transform: scale(0.75);
+          opacity: 0.75;
+        }
+      }
     </style>
   </head>
   <body>
