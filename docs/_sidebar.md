@@ -20,10 +20,26 @@
 
 ##### Development
 - Addon
-  - [Addon Development](/)
-  - [...](/)
+  - [Development](/development/addon/development.md)
+  - [AddonJson](/development/addon/addonjson.md)
+  - [Addon Types](/development/addon/type/overview.md)
+    - [Script](/development/addon/type/script.md)
+    - [Skin](/development/addon/type/skin.md)
+- Scripting
+  - [Script Structure](/development/script/structure.md)
+  - [Addon Lifecycle](/development/script/lifecycle.md)
+  - [Content Serves](/development/script/serves.md)
+  - [Addon Behaviours](/development/script/behaviour/overview.md)
+    - [ServiceAddon](/development/script/behaviour/serviceaddon.md)
+    - [ResolverAddon](/development/script/behaviour/resolveraddon.md)
 - Skinning
+  - [Skin Structure](/development/skin/structure.md)
+  - [Accent Colors](/development/skin/structure.md)
+- Repository
   - [...](/)
+- Miscellaneous
+  - [AddonID](/development/misc/addonid.md)
+  - [Versioning](/development/misc/versioning.md)
 
 ##### Contribute ❤️
 - Getting Started
@@ -37,3 +53,4 @@
   - [General](/contribute/platform_general.md)
 - [Docs](/contribute/docs.md)
 - [Tools](/contribute/tools.md)
+- [Debug](/contribute/debug.md)
