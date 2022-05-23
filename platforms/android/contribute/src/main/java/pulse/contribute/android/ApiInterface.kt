@@ -29,7 +29,7 @@ import pulse.contribute.android.util.Promise
 
 class ApiInterface(private val mContext: Context?) {
 
-    companion object {
+    companion object{
 
         //gets defined internally on App Start
         var activityWindow: Window? = null
@@ -79,8 +79,13 @@ class ApiInterface(private val mContext: Context?) {
 
     }
 
-    //<editor-fold desc="Internal.Native">
+    //todo
+    //Rename this file to ApiMap?
+    //Functions as below:
+    //@JavascriptInterface
+    //fun showTest(promiseId: String, toast: String) { subPackage.showTest(promiseId, toast) }
 
+    //<editor-fold desc="Internal.Native">
     @JavascriptInterface
     fun showNativeToast(promiseId: String, toast: String) {
         Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show()

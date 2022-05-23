@@ -3,7 +3,8 @@
 //Need more Informations? Put the variable here and make an Pull-Request
 
 var GlobalData = {
-  PlatformPathSeperator:  "/",
+  PlatformPathSeperator: "/",
+  PlatformPathDelimiter: ";",
   AppDataPath: "",
   Api: {}
 }
@@ -12,6 +13,10 @@ class GlobalsClass{
 
   get PlatformPathSeperator(){
     return GlobalData.PlatformPathSeperator;
+  }
+
+  get PlatformPathDelimiter(){
+    return GlobalData.PlatformPathDelimiter;
   }
 
   get AppDataPath(){

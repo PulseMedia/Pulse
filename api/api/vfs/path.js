@@ -11,7 +11,8 @@ const map = {
   "BASENAME": {
     args: [ "STRING" ]
   },
-  "$GETTER_SEPARATOR": {}
+  "$GETTER_SEPARATOR": {},
+  "$GETTER_DELIMITER": {}
 }
 
 function translatePathProtocol(pathToTranslate){
@@ -107,6 +108,10 @@ const api = {
 
   get separator(){
     return Globals.PlatformPathSeperator;
+  },
+
+  get delimiter(){
+    return Globals.PlatformPathDelimiter;
   }
 }
 

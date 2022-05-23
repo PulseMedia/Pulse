@@ -1,5 +1,6 @@
 package pulse.contribute.android.util
 
+import pulse.contribute.android.ApiInterface
 import java.lang.Exception
 
 class Helper(){
@@ -14,6 +15,8 @@ class Helper(){
                 false
             }
         }
+
+
 
     }
 
