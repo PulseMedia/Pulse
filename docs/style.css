@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto+Mono|Source+Sans+Pro:300,400,600");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;800&display=swap');
 * {
   -webkit-font-smoothing: antialiased;
   -webkit-overflow-scrolling: touch;
@@ -6,6 +6,9 @@
   -webkit-text-size-adjust: none;
   -webkit-touch-callout: none;
   box-sizing: border-box;
+}
+html, body{
+  font-family: 'Inter', Monaco, courier, monospace;
 }
 a{
   text-decoration: none;
@@ -58,7 +61,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   color: #c8c8c8;
-  font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
   font-size: 15px;
   letter-spacing: 0;
   margin: 0;
@@ -695,7 +697,7 @@ body {
   background-color: #282828;
   border-radius: 2px;
   color: #657b83;
-  font-family: 'Roboto Mono', Monaco, courier, monospace;
+  font-family: 'JetBrains Mono', Monaco, courier, monospace;
   margin: 0 2px;
   padding: 3px 5px;
   white-space: pre-wrap;
@@ -707,7 +709,7 @@ body {
   -moz-osx-font-smoothing: initial;
   -webkit-font-smoothing: initial;
   background-color: #282828;
-  font-family: 'Roboto Mono', Monaco, courier, monospace;
+  font-family: 'JetBrains Mono', Monaco, courier, monospace;
   line-height: 1.5rem;
   margin: 1.2em 0;
   overflow: auto;
@@ -798,7 +800,7 @@ body {
   border-radius: 2px;
   color: #657b83;
   display: block;
-  font-family: 'Roboto Mono', Monaco, courier, monospace;
+  font-family: 'JetBrains Mono', Monaco, courier, monospace;
   font-size: 0.8rem;
   line-height: inherit;
   margin: 0 2px;
@@ -1256,6 +1258,11 @@ tr td a.TOCClassConstructor{
 
 tr td a.TOCClassFunc.property{
   color: #cfaf4e;
+}
+
+section h1 > a::after{
+  content: ".";
+  font-size: 39px;
 }
 
 .sidebar-nav li{
