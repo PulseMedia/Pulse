@@ -15,7 +15,7 @@ class Directory { companion object {
             val dir = File(path)
             Promise(promiseId).resolve(dir.exists() && dir.isDirectory)
         } catch (e: Exception) {
-            Promise(promiseId).resolve(false)
+            Promise(promiseId).resolveFalse()
         }
     }
 

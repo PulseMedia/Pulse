@@ -16,6 +16,11 @@ namespace PulseContribute.DotNet.WinForms
                 { "DELETE_FILE", "DeleteFile" },
                 { "EXISTS_FILE", "ExistsFile" },
 
+                { "EXISTS_DIRECTORY", "ExistsDirectory" },
+                { "CREATE_DIRECTORY", "CreateDirectory" },
+                { "DELETE_DIRECTORY", "DeleteDirectory" },
+                { "READ_DIRECTORY", "ReadDirectory" },
+
                 { "FETCH", "AsyncFetch" }
             });
         }
@@ -31,6 +36,18 @@ namespace PulseContribute.DotNet.WinForms
         public void DeleteFile(string promiseId, string path) { VFS.File.DeleteFile(promiseId, path); }
 
         public void ExistsFile(string promiseId, string path) { VFS.File.ExistsFile(promiseId, path); }
+
+        #endregion
+
+        #region VFS.Directory
+
+        public void ExistsDirectory(string promiseId, string path){ VFS.Directory.ExistsDirectory(promiseId, path); }
+
+        public void CreateDirectory(string promiseId, string path) { VFS.Directory.CreateDirectory(promiseId, path); }
+
+        public void DeleteDirectory(string promiseId, string path) { VFS.Directory.DeleteDirectory(promiseId, path); }
+
+        public void ReadDirectory(string promiseId, string path) { VFS.Directory.ReadDirectory(promiseId, path); }
 
         #endregion
 
