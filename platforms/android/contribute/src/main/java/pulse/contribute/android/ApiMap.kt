@@ -12,15 +12,11 @@ class ApiMap() {
 
     companion object{
 
-        //gets defined internally on App Start
-
         //Platform api function map for this platform
+
         fun platformApiMap(): String {
             return JSONObject(hashMapOf(
-
-                "NATIVE_TOAST" to "showNativeToast",
-                "NATIVE_NOTIFICATION" to "showNativeNotification",
-                "NATIVE_NOTIFICATION_SOUND" to "playNotificationSound",
+                //<MAP.JS:FUNCTION_NAME> to <KOTLIN_FUNCTION_NAME>
 
                 "WRITE_FILE" to "writeFile",
                 "APPEND_FILE" to "appendFile",
@@ -34,25 +30,18 @@ class ApiMap() {
                 "READ_DIRECTORY" to "readDirectory",
 
                 "FETCH" to "asyncFetch",
-                "DOWNLOAD_FILE" to "downloadFile"
+                "DOWNLOAD_FILE" to "downloadFile",
 
-            ) as Map<String, String>).toString()
+                "NATIVE_TOAST" to "showNativeToast",
+                "NATIVE_NOTIFICATION" to "showNativeNotification",
+                "NATIVE_NOTIFICATION_SOUND" to "playNotificationSound",
+
+                "aaa" to VFS_File::writeFile
+
+            ) as Map<String, Any>).toString()
         }
 
     }
-
-    //<editor-fold desc="Internal.Native">
-
-    @JavascriptInterface
-    fun showNativeToast(promiseId: String, toast: String) = Internal_Native.showNativeToast(promiseId, toast)
-
-    @JavascriptInterface
-    fun showNativeNotification(promiseId: String, title: String, message: String, time: Int) = Internal_Native.showNativeNotification(promiseId, title, message, time)
-
-    @JavascriptInterface
-    fun playNotificationSound(promiseId: String) = Internal_Native.playNotificationSound(promiseId)
-
-    //</editor-fold>
 
     //<editor-fold desc="VFS.File">
 
@@ -96,6 +85,19 @@ class ApiMap() {
 
     @JavascriptInterface
     fun downloadFile(promiseId: String, url: String, saveTo: String, optionsJson: String, progressEventId: String) = NET_Web.downloadFile(promiseId, url, saveTo, optionsJson, progressEventId)
+
+    //</editor-fold>
+
+    //<editor-fold desc="Internal.Native">
+
+    @JavascriptInterface
+    fun showNativeToast(promiseId: String, toast: String) = Internal_Native.showNativeToast(promiseId, toast)
+
+    @JavascriptInterface
+    fun showNativeNotification(promiseId: String, title: String, message: String, time: Int) = Internal_Native.showNativeNotification(promiseId, title, message, time)
+
+    @JavascriptInterface
+    fun playNotificationSound(promiseId: String) = Internal_Native.playNotificationSound(promiseId)
 
     //</editor-fold>
 

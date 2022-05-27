@@ -1206,10 +1206,7 @@ div.function pre, div.function code{
 }
 
 tr td a.TOCClassFunc{
-  margin-left: 10px;
-  border-left: 2px solid rgba(255,255,255,0.1);
   color: #6842db;
-  padding-left: 10px;
 }
 
 tr td a.TOCClassConstructor{
@@ -1224,6 +1221,8 @@ tr td a.TOCClassConstructor{
   border-radius: 3px;
   font-size: 15px;
   padding: 5px 10px;
+  font-weight: 700;
+  position: relative;
 }
 
 .function > p > em{
@@ -1256,6 +1255,32 @@ tr td a.TOCClassConstructor{
   color: #ffe3bf !important;
 }
 
+.function > p > em[tagcontent]::before{
+  content: "𝑓";
+  position: absolute;
+  left: -20px;
+  color: #fff;
+  font-size: 18px;
+  opacity: 0.25;
+  font-style: normal;
+}
+
+.function > p > em[tagcontent="Property"]::before{
+  content: "𝑝";
+}
+
+.function > p > em[tagcontent="CONSTRUCTOR"]::before{
+  content: "";
+}
+
+.function > p > em[tagcontent="Getter"]::before{
+  content: "𝑝";
+}
+
+.function > p > em[tagcontent="Setter"]::before{
+  content: "𝑝";
+}
+
 tr td a.TOCClassFunc.property{
   color: #cfaf4e;
 }
@@ -1271,6 +1296,23 @@ section h1 > a::after{
     cursor:pointer;
     user-select: none;
 }
+
+.mathItalicChar{
+  color: #fff !important;
+  opacity: 0.25;
+  border-right: 2px solid rgba(255,255,255,0.6);
+  margin-right: 10px;
+  padding-right: 10px;
+}
+
+.mathItalicCharR{
+  color: #fff !important;
+  opacity: 0.25;
+  border-left: 2px solid rgba(255,255,255,0.6);
+  margin-left: 10px;
+  padding-left: 10px;
+}
+
 .sidebar-nav ul:not(.app-sub-sidebar)>li:not(.file)::before{
     content:'';
     display:block;

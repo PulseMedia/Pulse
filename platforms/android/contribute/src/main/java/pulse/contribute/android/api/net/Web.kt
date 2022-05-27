@@ -29,6 +29,7 @@ class Web { companion object {
 
             val options = JSONObject(optionsJson);
             conn.requestMethod = options.optString("method", "GET")
+
             val customHeader: JSONObject? = options.optJSONObject("header");
             if(customHeader != null) {
                 val headerNames: JSONArray? = customHeader.names()

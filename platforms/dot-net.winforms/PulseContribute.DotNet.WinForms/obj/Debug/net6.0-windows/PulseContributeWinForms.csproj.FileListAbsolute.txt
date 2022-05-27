@@ -1,0 +1,11 @@
+X:\PulsePublic\platforms\winforms\PulseContributeWinForms\bin\Debug\net6.0-windows\PulseContributeWinForms.deps.json
+X:\PulsePublic\platforms\winforms\PulseContributeWinForms\bin\Debug\net6.0-windows\PulseContributeWinForms.dll
+X:\PulsePublic\platforms\winforms\PulseContributeWinForms\bin\Debug\net6.0-windows\ref\PulseContributeWinForms.dll
+X:\PulsePublic\platforms\winforms\PulseContributeWinForms\bin\Debug\net6.0-windows\PulseContributeWinForms.pdb
+X:\PulsePublic\platforms\winforms\PulseContributeWinForms\obj\Debug\net6.0-windows\PulseContributeWinForms.GeneratedMSBuildEditorConfig.editorconfig
+X:\PulsePublic\platforms\winforms\PulseContributeWinForms\obj\Debug\net6.0-windows\PulseContributeWinForms.AssemblyInfoInputs.cache
+X:\PulsePublic\platforms\winforms\PulseContributeWinForms\obj\Debug\net6.0-windows\PulseContributeWinForms.AssemblyInfo.cs
+X:\PulsePublic\platforms\winforms\PulseContributeWinForms\obj\Debug\net6.0-windows\PulseContributeWinForms.csproj.CoreCompileInputs.cache
+X:\PulsePublic\platforms\winforms\PulseContributeWinForms\obj\Debug\net6.0-windows\PulseContributeWinForms.dll
+X:\PulsePublic\platforms\winforms\PulseContributeWinForms\obj\Debug\net6.0-windows\ref\PulseContributeWinForms.dll
+X:\PulsePublic\platforms\winforms\PulseContributeWinForms\obj\Debug\net6.0-windows\PulseContributeWinForms.pdb

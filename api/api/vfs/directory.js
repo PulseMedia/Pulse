@@ -52,4 +52,4 @@ class Directory extends presenter {
 
 }
 
-export default { map, api, presenter: File }
+export default { map, api, presenter: Directory }

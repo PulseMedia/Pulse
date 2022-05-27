@@ -37,7 +37,7 @@ class File { companion object {
             val file = File(path)
             Promise(promiseId).resolve(file.exists() && file.isFile && file.delete())
         } catch (e: Exception) {
-            Promise(promiseId).resolve(false)
+            Promise(promiseId).resolveFalse()
         }
     }
 
