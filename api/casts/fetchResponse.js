@@ -4,6 +4,7 @@ export class FetchResponse{
     this.__status = oData.status;
     this.__body = oData.body;
     this.__header = oData.header;
+    this.__exception = oData.exception || undefined;
   }
 
   get ok(){

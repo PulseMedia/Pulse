@@ -90,6 +90,19 @@ namespace PulseContribute.DotNet
             return fallback;
         }
 
+        public int OptInt(string key, int fallback)
+        {
+            if (data.TryGetValue(key, out object value))
+            {
+                if (value is int)
+                {
+                    return (int)value;
+                }
+                return fallback;
+            }
+            return fallback;
+        }
+
         public double OptDouble(string key, double fallback)
         {
             if (data.TryGetValue(key, out object value))

@@ -53,7 +53,7 @@ namespace PulseContribute.DotNet.WinForms
 
         #region NET.Web
 
-        public void AsyncFetch(string promiseId, string url, string options) { Net.Web.AsyncInternalFetch(promiseId, url, options); }
+        public void AsyncFetch(string promiseId, string url, string options) { Net.Web.AsyncFetch(promiseId, url, options); }
 
         #endregion
     }

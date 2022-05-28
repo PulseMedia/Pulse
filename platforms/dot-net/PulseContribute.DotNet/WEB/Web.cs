@@ -10,103 +10,116 @@ namespace PulseContribute.DotNet.Net
     public static class Web
     {
 
-        public static async void AsyncInternalFetch(string promiseId, string url, string optionsJson)
+        public static async void AsyncFetch(string promiseId, string url, string optionsJson)
         {
-
-            using var client = new HttpClient();
+            try
+            {
+                using var client = new HttpClient();
             
-             System.Diagnostics.Debug.WriteLine("UA: " + App.UserAgent);
-            client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", App.UserAgent);
-            JsonObject options = new JsonObject(optionsJson);
-            //Dictionary<string, object> options = (Dictionary<string, object>)JSON.Parse(optionsJson);
-            string requestMethod = options.OptString("method", "GET");
+                client.Timeout = TimeSpan.FromMilliseconds(1000);
 
-            JsonObject customHeader = options.OptJsonObject("header");
+                client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", App.UserAgent);
+                JsonObject options = new JsonObject(optionsJson);
+                string requestMethod = options.OptString("method", "GET");
 
-            if(customHeader != null)
-            {
-                foreach (KeyValuePair<string, object> entry in customHeader.raw)
+                JsonObject customHeader = options.OptJsonObject("header");
+
+                if(customHeader != null)
                 {
-                    if(entry.Value is string)
+                    foreach (KeyValuePair<string, object> entry in customHeader.raw)
                     {
-                        client.DefaultRequestHeaders.TryAddWithoutValidation(entry.Key, (string)entry.Value);
-                    }
-                }
-            }
-
-            HttpResponseMessage? response = null;
-
-            switch (requestMethod)
-            {
-                case "GET":
-                    response = await client.GetAsync(url);
-                    break;
-                case "POST":
-                    ByteArrayContent postContext = new ByteArrayContent(Encoding.ASCII.GetBytes(options.OptString("body", "")));
-                    response = await client.PostAsync(url, postContext);
-                    break;
-                case "HEAD":
-                    response = await client.SendAsync(new HttpRequestMessage(HttpMethod.Head, url));
-                    break;
-                case "PUT":
-                    ByteArrayContent putContext = new ByteArrayContent(Encoding.ASCII.GetBytes(options.OptString("body", "")));
-                    response = await client.PutAsync(url, putContext);
-                    break;
-                case "DELETE":
-                    response = await client.DeleteAsync(url);
-                    break;
-                case "PATCH":
-                    ByteArrayContent patchContext = new ByteArrayContent(Encoding.ASCII.GetBytes(options.OptString("body", "")));
-                    response = await client.PatchAsync(url, patchContext);
-                    break;
-                case "TRACE":
-                case "OPTIONS":
-                default:
-                    break;
-            }
-            
-            if (response != null)
-            {
-                HttpResponseHeaders headers = response.Headers;
-                Dictionary<string, object> respHeader = new Dictionary<string, object>();
-
-                foreach (KeyValuePair<string, IEnumerable<string>> myHeader in headers)
-                {
-                    if (myHeader.Value.Count() > 1)
-                    {
-                        List<string> subheaders = new List<string>();
-                        foreach (string subheader in myHeader.Value)
+                        if(entry.Value is string)
                         {
-                            subheaders.Add(subheader);
-                        }
-                        respHeader.Add(myHeader.Key, subheaders.ToArray());
-                    }
-                    else
-                    {
-                        foreach (string subheader in myHeader.Value)
-                        {
-                            respHeader.Add(myHeader.Key, subheader);
+                            client.DefaultRequestHeaders.TryAddWithoutValidation(entry.Key, (string)entry.Value);
                         }
                     }
                 }
-                string responseBody = await response.Content.ReadAsStringAsync();
-                response.Dispose();
-                client.Dispose();
-                Promise.Create(promiseId).ResolveObject("FETCH_RESPONSE", new Dictionary<string, object>
+
+                client.Timeout = TimeSpan.FromMilliseconds(options.OptInt("timeout", 1000));
+
+                HttpResponseMessage? response = null;
+
+                switch (requestMethod)
                 {
-                    { "status", response.StatusCode },
-                    { "body", responseBody },
-                    { "header", respHeader }
-                });
-            } else
+                    case "GET":
+                        response = await client.GetAsync(url);
+                        break;
+                    case "POST":
+                        ByteArrayContent postContext = new ByteArrayContent(Encoding.ASCII.GetBytes(options.OptString("body", "")));
+                        response = await client.PostAsync(url, postContext);
+                        break;
+                    case "HEAD":
+                        response = await client.SendAsync(new HttpRequestMessage(HttpMethod.Head, url));
+                        break;
+                    case "PUT":
+                        ByteArrayContent putContext = new ByteArrayContent(Encoding.ASCII.GetBytes(options.OptString("body", "")));
+                        response = await client.PutAsync(url, putContext);
+                        break;
+                    case "DELETE":
+                        response = await client.DeleteAsync(url);
+                        break;
+                    case "PATCH":
+                        ByteArrayContent patchContext = new ByteArrayContent(Encoding.ASCII.GetBytes(options.OptString("body", "")));
+                        response = await client.PatchAsync(url, patchContext);
+                        break;
+                    case "TRACE":
+                    case "OPTIONS":
+                    default:
+                        break;
+                }
+            
+                if (response != null)
+                {
+                    HttpResponseHeaders headers = response.Headers;
+                    Dictionary<string, object> respHeader = new Dictionary<string, object>();
+
+                    foreach (KeyValuePair<string, IEnumerable<string>> myHeader in headers)
+                    {
+                        if (myHeader.Value.Count() > 1)
+                        {
+                            List<string> subheaders = new List<string>();
+                            foreach (string subheader in myHeader.Value)
+                            {
+                                subheaders.Add(subheader);
+                            }
+                            respHeader.Add(myHeader.Key, subheaders.ToArray());
+                        }
+                        else
+                        {
+                            foreach (string subheader in myHeader.Value)
+                            {
+                                respHeader.Add(myHeader.Key, subheader);
+                            }
+                        }
+                    }
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    response.Dispose();
+                    client.Dispose();
+                    Promise.Create(promiseId).ResolveObject("FETCH_RESPONSE", new Dictionary<string, object>
+                    {
+                        { "status", response.StatusCode },
+                        { "body", responseBody },
+                        { "header", respHeader }
+                    });
+                } else
+                {
+                    client.Dispose();
+                    Promise.Create(promiseId).ResolveObject("FETCH_RESPONSE", new Dictionary<string, object>
+                    {
+                        { "status", 400 },
+                        { "body", "" },
+                        { "header", new Dictionary<string, object>() }
+                    });
+                }
+            }
+            catch (Exception)
             {
-                client.Dispose();
                 Promise.Create(promiseId).ResolveObject("FETCH_RESPONSE", new Dictionary<string, object>
-                {
-                    { "status", 400 },
-                    { "body", "" },
-                    { "header", new Dictionary<string, object>() }
-                });
+                    {
+                        { "status", 400 },
+                        { "body", "" },
+                        { "header", new Dictionary<string, object>() }
+                    });
             }
         }
 

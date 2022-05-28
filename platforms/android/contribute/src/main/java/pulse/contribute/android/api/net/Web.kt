@@ -42,6 +42,9 @@ class Web { companion object {
                     }
                 }
             }
+
+            conn.connectTimeout = options.optInt("timeout", 1000)
+
             val body = options.optString("body", "")
             if (body.isNotEmpty()) {
                 conn.doOutput = true;
@@ -82,6 +85,7 @@ class Web { companion object {
                 )
             )
         } catch (e: Exception) {
+
             Promise(promiseId).resolveObject(
                 "FETCH_RESPONSE", JSONObject(
                     hashMapOf(
