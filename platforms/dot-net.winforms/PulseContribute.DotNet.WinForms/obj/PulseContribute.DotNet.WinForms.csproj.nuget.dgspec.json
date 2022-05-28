@@ -44,9 +44,17 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "dependencies": {
+            "LibVLCSharp.WinForms": {
+              "target": "Package",
+              "version": "[3.6.6, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.1, )"
+            },
+            "VideoLAN.LibVLC.Windows": {
+              "target": "Package",
+              "version": "[3.0.17.4, )"
             }
           },
           "imports": [

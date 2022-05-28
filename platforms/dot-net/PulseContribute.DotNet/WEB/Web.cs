@@ -15,7 +15,6 @@ namespace PulseContribute.DotNet.Net
             try
             {
                 using var client = new HttpClient();
-            
                 client.Timeout = TimeSpan.FromMilliseconds(1000);
 
                 client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", App.UserAgent);
@@ -97,7 +96,7 @@ namespace PulseContribute.DotNet.Net
                     client.Dispose();
                     Promise.Create(promiseId).ResolveObject("FETCH_RESPONSE", new Dictionary<string, object>
                     {
-                        { "status", response.StatusCode },
+                        { "status", (int)response.StatusCode },
                         { "body", responseBody },
                         { "header", respHeader }
                     });

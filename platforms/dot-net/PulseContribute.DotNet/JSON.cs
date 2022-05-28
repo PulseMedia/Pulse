@@ -64,6 +64,11 @@ namespace PulseContribute.DotNet
             this.data = new Dictionary<string,object>();
         }
 
+        public bool Has(string key)
+        {
+            return data.ContainsKey(key);
+        }
+
         public string OptString(string key, string fallback)
         {
             if(data.TryGetValue(key, out object value))
@@ -152,6 +157,19 @@ namespace PulseContribute.DotNet
                     {
                         data = (Dictionary<string,object>)value
                     };
+                }
+                return null;
+            }
+            return null;
+        }
+
+        public object[]? OptJsonArray(string key)
+        {
+            if (data.TryGetValue(key, out object value))
+            {
+                if (value is object[])
+                {
+                    return (object[])value;
                 }
                 return null;
             }
