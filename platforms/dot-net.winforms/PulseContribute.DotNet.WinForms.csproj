@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\dot-net\PulseContribute.DotNet\PulseContribute.DotNet.csproj" />
+    <ProjectReference Include="..\dot-net\PulseContribute.DotNet.csproj" />
   </ItemGroup>
 
 </Project>

@@ -28,15 +28,42 @@ namespace PulseContribute.DotNet.WinForms
         };
 
         public VideoView view;
-        public LibVLC LibVLCInstance;
-        public MediaPlayer MediaPlayer;
+        public LibVLC? LibVLCInstance;
+        public MediaPlayer? MediaPlayer;
 
-        public Player(VideoView videoView)
+        public Player(VideoView videoView, Action onDone, Action onFailed)
         {
             view = videoView;
-            LibVLCInstance = new LibVLC(InitOptions.ToArray());
-            MediaPlayer = new MediaPlayer(LibVLCInstance);
-            view.MediaPlayer = MediaPlayer;
+
+            //Load LibVLC in another thread
+            //This can take a while - we dont want to get stuck in the SplashScreen
+            new Thread(() =>
+            {
+                try
+                {
+                    LibVLCInstance = new LibVLC(InitOptions.ToArray());
+                    MediaPlayer = new MediaPlayer(LibVLCInstance);
+                } catch (Exception)
+                {
+                    Program.ExecuteOnMainThread(() =>
+                    {
+                        //Callback that the Player could not be initialized and cannot be used in the app
+                        onFailed();
+                    });
+                    return;
+                }
+  
+
+                Program.ExecuteOnMainThread(() =>
+                {
+                    //Only Accessible from MainThead
+                    view.MediaPlayer = MediaPlayer;
+
+                    //Callback that the Player is initialized and can be used in the app
+                    onDone();
+                });
+
+            }).Start();
         }
 
         public void Play(string type, string playbackData)
@@ -49,7 +76,7 @@ namespace PulseContribute.DotNet.WinForms
 
             if (playback.Has("url"))
             {
-                Media media = new Media(LibVLCInstance, new Uri(playback.OptString("url", "")));
+                Media media = new Media(LibVLCInstance!, new Uri(playback.OptString("url", "")));
                 
                 if(type == "VIDEO")
                 {

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PulseContribute.DotNet.WinForms", "PulseContribute.DotNet.WinForms\PulseContribute.DotNet.WinForms.csproj", "{13EA6F59-123C-4E5B-BF61-F22C4D8AC787}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PulseContribute.DotNet.WinForms", "PulseContribute.DotNet.WinForms.csproj", "{13EA6F59-123C-4E5B-BF61-F22C4D8AC787}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PulseContribute.DotNet", "..\dot-net\PulseContribute.DotNet\PulseContribute.DotNet.csproj", "{6307CD9B-39D2-4798-9DEE-A0967A0B01D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PulseContribute.DotNet", "..\dot-net\PulseContribute.DotNet.csproj", "{6307CD9B-39D2-4798-9DEE-A0967A0B01D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
