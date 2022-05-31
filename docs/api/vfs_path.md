@@ -5,7 +5,7 @@
 [Function]
 
 ## combine(...args&lt;String&gt;)
-Combines the given string arguments to an File-path with the the OS Path Separator.  
+Combines the given string arguments to an File-path with the OS Path Separator.  
 The special protocol is also translated
 
 ### Parameter

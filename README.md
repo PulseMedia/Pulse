@@ -9,7 +9,9 @@ Please note that not every part of the App & Platform-related code is OpenSource
 
 ### Bugs
 Found a bug? - Please create an "*issue*" to solve and track the issue.
-  
+
 ### Contribute
 ❤️ We are happy for every Contribution up to any Bug report, which will Improve the App in any way.  
-Check our [Contribute Section](https://pulsemedia.github.io/Pulse/#/contribute/overview) for more informations.
+Check our [Contribute Section](https://pulsemedia.github.io/Pulse/#/contribute/overview) for more informations.  
+Make sure that your pull-requests are going into the `development` or the corresponding branch.  
+Content in the main branch is equal to the current app release/version.  

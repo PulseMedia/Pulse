@@ -91,8 +91,10 @@
             return renderSupportTable(occur.split(",").map(e => e.trim()));
           }).replaceAll("[Function]", `<div class="function">`)
             .replaceAll("[/Function]", `</div>`)
-            .replaceAll("[Property]", `<div class="function property">`)
+            .replaceAll("[Property]", `<div class="function serve">`)
             .replaceAll("[/Property]", `</div>`)
+            .replaceAll("[Serve]", `<div class="function serve">`)
+            .replaceAll("[/Serve]", `</div>`)
             .replaceAll("[RepresentationClass]", `<hr><div class="repclass"><h1><a class="anchor"><span>Representation Class</span></a></h1>`)
             .replaceAll("[/RepresentationClass]", `</div>`)
             .replaceAll("[Class]", `<hr><div class="class">`)
@@ -109,7 +111,7 @@
             var staticFuncs = asHtml.querySelectorAll("div.generated > div.function > h2 > a");
             for (let i = 0; i < staticFuncs.length; i++) {
               let item = staticFuncs[i];
-              funcTable += `<tr><td><a href="${item.hash}">${item.innerText.split("(")[0]}</a></td></tr>`
+              funcTable += `<tr><td><b class="mathItalicChar">𝑓</b><a href="${item.hash}">${item.innerText.split("(")[0]}</a></td></tr>`
             }
             if(funcTable.length > 0){
               contentTableHTML += `<table><thead><tr><th>Static Functions</th></tr></thead><tbody>`
@@ -140,12 +142,16 @@
                   }
                   if(innerItem.innerText.split("(")[0].toUpperCase() == "CONSTRUCTOR"){
                     if(tilteItems.length > 0){
-                      classTable += `<tr><td><a href="${tilteItems[0].hash}" class="TOCClassConstructor ${extraClass}"><strong class="tableType">${title}</strong></a></td></tr>`
+                      classTable += `<tr><td><a href="${tilteItems[0].hash}" class="TOCClassConstructor ${extraClass}"><strong class="tableType">${title}</strong></a><b class="mathItalicCharR">Constructor</b></td></tr>`
                     } else {
-                      classTable += `<tr><td><a href="${innerItem.hash}" class="TOCClassConstructor ${extraClass}"><strong class="tableType">${title}</strong></a></td></tr>`
+                      classTable += `<tr><td><a href="${innerItem.hash}" class="TOCClassConstructor ${extraClass}"><strong class="tableType">${title}</strong></a><b class="mathItalicCharR">Constructor</b></td></tr>`
                     }
                   } else {
-                    classTable += `<tr><td><a href="${innerItem.hash}" class="TOCClassFunc ${extraClass}">${innerItem.innerText.split("(")[0]}</a></td></tr>`
+                    if(innerItem.parentElement.parentElement.classList.contains("property")){
+                      classTable += `<tr><td><b class="mathItalicChar">- 𝑝</b><a href="${innerItem.hash}" class="TOCClassFunc ${extraClass}">${innerItem.innerText.split("(")[0]}</a></td></tr>`
+                    } else {
+                      classTable += `<tr><td><b class="mathItalicChar">- 𝑓</b><a href="${innerItem.hash}" class="TOCClassFunc ${extraClass}">${innerItem.innerText.split("(")[0]}</a></td></tr>`
+                    }
                   }
               }
 
@@ -176,9 +182,13 @@
                 extraClass += " property";
               }
               if(item.innerText.split("(")[0].toUpperCase() == "CONSTRUCTOR"){
-                representationTable += `<tr><td><a href="${item.hash}" class="TOCClassConstructor ${extraClass}"><strong class="tableType">Representation Class</strong></a></td></tr>`
+                representationTable += `<tr><td><a href="${item.hash}" class="TOCClassConstructor ${extraClass}"><strong class="tableType">Representation Class</strong></a><b class="mathItalicCharR">Constructor</b></td></tr>`
               } else {
-                representationTable += `<tr><td><a href="${item.hash}" class="TOCClassFunc ${extraClass}">${item.innerText.split("(")[0]}</a></td></tr>`
+                if(item.parentElement.parentElement.classList.contains("property")){
+                  representationTable += `<tr><td><b class="mathItalicChar">- 𝑝</b><a href="${item.hash}" class="TOCClassFunc ${extraClass}">${item.innerText.split("(")[0]}</a></td></tr>`
+                } else {
+                  representationTable += `<tr><td><b class="mathItalicChar">- 𝑓</b><a href="${item.hash}" class="TOCClassFunc ${extraClass}">${item.innerText.split("(")[0]}</a></td></tr>`
+                }
               }
             }
 
@@ -197,6 +207,17 @@
           var tags = document.querySelectorAll("div.function > p > em");
           for (let i = 0; i < tags.length; i++) {
             tags[i].setAttribute("tagContent", tags[i].innerText);
+            tags[i].parentElement.parentElement.hasTypeTag = true;
+          }
+
+          var funcs = document.querySelectorAll("div.function");
+          for (let i = 0; i < funcs.length; i++) {
+            if(funcs[i].hasTypeTag !== true){
+              console.log(funcs[i]);
+              let created = document.createElement("p");
+              created.innerHTML = `<em tagcontent="Function">Function</em>`
+              funcs[i].insertBefore(created, funcs[i].firstChild.nextElementSibling.nextElementSibling);
+            }
           }
         });
 

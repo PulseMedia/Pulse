@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto+Mono|Source+Sans+Pro:300,400,600");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;800&display=swap');
 * {
   -webkit-font-smoothing: antialiased;
   -webkit-overflow-scrolling: touch;
@@ -6,6 +6,9 @@
   -webkit-text-size-adjust: none;
   -webkit-touch-callout: none;
   box-sizing: border-box;
+}
+html, body{
+  font-family: 'Inter', Monaco, courier, monospace;
 }
 a{
   text-decoration: none;
@@ -58,7 +61,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   color: #c8c8c8;
-  font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
   font-size: 15px;
   letter-spacing: 0;
   margin: 0;
@@ -239,7 +241,6 @@ main.hidden {
   display: none;
 }
 .sidebar ul {
-  margin: 0 0 0 15px;
   padding: 0;
 }
 .sidebar li > p {
@@ -696,7 +697,7 @@ body {
   background-color: #282828;
   border-radius: 2px;
   color: #657b83;
-  font-family: 'Roboto Mono', Monaco, courier, monospace;
+  font-family: 'JetBrains Mono', Monaco, courier, monospace;
   margin: 0 2px;
   padding: 3px 5px;
   white-space: pre-wrap;
@@ -708,7 +709,7 @@ body {
   -moz-osx-font-smoothing: initial;
   -webkit-font-smoothing: initial;
   background-color: #282828;
-  font-family: 'Roboto Mono', Monaco, courier, monospace;
+  font-family: 'JetBrains Mono', Monaco, courier, monospace;
   line-height: 1.5rem;
   margin: 1.2em 0;
   overflow: auto;
@@ -799,7 +800,7 @@ body {
   border-radius: 2px;
   color: #657b83;
   display: block;
-  font-family: 'Roboto Mono', Monaco, courier, monospace;
+  font-family: 'JetBrains Mono', Monaco, courier, monospace;
   font-size: 0.8rem;
   line-height: inherit;
   margin: 0 2px;
@@ -1205,10 +1206,7 @@ div.function pre, div.function code{
 }
 
 tr td a.TOCClassFunc{
-  margin-left: 10px;
-  border-left: 2px solid rgba(255,255,255,0.1);
   color: #6842db;
-  padding-left: 10px;
 }
 
 tr td a.TOCClassConstructor{
@@ -1223,6 +1221,8 @@ tr td a.TOCClassConstructor{
   border-radius: 3px;
   font-size: 15px;
   padding: 5px 10px;
+  font-weight: 700;
+  position: relative;
 }
 
 .function > p > em{
@@ -1255,8 +1255,39 @@ tr td a.TOCClassConstructor{
   color: #ffe3bf !important;
 }
 
+.function > p > em[tagcontent]::before{
+  content: "𝑓";
+  position: absolute;
+  left: -20px;
+  color: #fff;
+  font-size: 18px;
+  opacity: 0.25;
+  font-style: normal;
+}
+
+.function > p > em[tagcontent="Property"]::before{
+  content: "𝑝";
+}
+
+.function > p > em[tagcontent="CONSTRUCTOR"]::before{
+  content: "";
+}
+
+.function > p > em[tagcontent="Getter"]::before{
+  content: "𝑝";
+}
+
+.function > p > em[tagcontent="Setter"]::before{
+  content: "𝑝";
+}
+
 tr td a.TOCClassFunc.property{
   color: #cfaf4e;
+}
+
+section h1 > a::after{
+  content: ".";
+  font-size: 39px;
 }
 
 .sidebar-nav li{
@@ -1265,6 +1296,23 @@ tr td a.TOCClassFunc.property{
     cursor:pointer;
     user-select: none;
 }
+
+.mathItalicChar{
+  color: #fff !important;
+  opacity: 0.25;
+  border-right: 2px solid rgba(255,255,255,0.6);
+  margin-right: 10px;
+  padding-right: 10px;
+}
+
+.mathItalicCharR{
+  color: #fff !important;
+  opacity: 0.25;
+  border-left: 2px solid rgba(255,255,255,0.6);
+  margin-left: 10px;
+  padding-left: 10px;
+}
+
 .sidebar-nav ul:not(.app-sub-sidebar)>li:not(.file)::before{
     content:'';
     display:block;

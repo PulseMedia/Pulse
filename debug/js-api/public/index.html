@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>debug: js-api</title>
+    <script src="https://unpkg.com/lodash@4.17.20"></script>
+    <style>
+      body {
+        background: black;
+        color: white;
+      }
+      pre code {
+        font: 18px Consolas, Menlo, Monaco, monospace;
+      }
+      .root{
+        display: flex;
+        flex-direction: column;
+      }
+      .loader {
+        color: #82aaf5;
+        font-family: Consolas, Menlo, Monaco, monospace;
+        font-weight: bold;
+        font-size: 20px;
+        opacity: 0.8;
+      }
+      .loader:after {
+        content: "</>";
+        display: inline-block;
+        animation: pulse 0.2s alternate infinite ease-in-out;
+      }
+      @keyframes pulse {
+        to {
+          transform: scale(0.75);
+          opacity: 0.75;
+        }
+      }
+    </style>
+  </head>
+  <body>
+      <script src="./bundle.js"></script>
+  </body>
+</html>
