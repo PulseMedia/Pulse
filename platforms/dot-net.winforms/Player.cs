@@ -139,6 +139,7 @@ namespace PulseContribute.DotNet.WinForms
 
     }
 
+    //Used internally to call player functions
     public interface MediaPlayerApi
     {
 
