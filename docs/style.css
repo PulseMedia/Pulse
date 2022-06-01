@@ -310,10 +310,12 @@ body.sticky .sidebar-toggle {
 }
 .markdown-section {
   margin: 0 auto;
-  max-width: 80%;
+  max-width: 85%;
   padding: 30px 15px 40px 15px;
+  padding-left: 50px;
   position: relative;
 }
+
 .markdown-section > * {
   box-sizing: border-box;
   font-size: inherit;
@@ -325,6 +327,8 @@ body.sticky .sidebar-toggle {
   border: none;
   border-bottom: 1px solid #eee;
   margin: 2em 0;
+  margin-left: -50px;
+  opacity: 0.15;
 }
 .markdown-section iframe {
   border: 1px solid #eee;
@@ -661,6 +665,20 @@ body {
   color: #777;
   font-size: 1rem;
 }
+
+.markdown-section > h1{
+  margin-left: -20px;
+}
+.markdown-section > h2{
+  margin-left: -15px;
+}
+.markdown-section > h3{
+  margin-left: -10px;
+}
+.markdown-section > h4{
+  margin-left: -5px;
+}
+
 .markdown-section figure,
 .markdown-section p,
 .markdown-section ul,

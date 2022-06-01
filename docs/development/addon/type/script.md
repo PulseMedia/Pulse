@@ -1,22 +1,27 @@
 # Script Addon
+
+> `"type": "script"`
+
 ---
-### AddonJson Properties
-Extra properties that are available if your are using the `script`-value as the type in your addon.json file
+### ExtendProperties
+Properties for the 'extends'-object that are available if your are using the `skin`-value as the type in your `addon.json` file.  
 
 | Key | Type |
 | ------------- | ------------- |
-| [`script` *Required*](#propertie-script) | **string** |
+| [`script` *Required*](#extendpropertie-script) | **string** |
 
 Look at the [Scripting](/development/script/structure.md) section for more script related informations.
 ___
-#### **Propertie:** script
-`string` Used to determine the name of the main script
+#### **ExtendPropertie:** script
+> `string` Used to determine the name of the main script
 
 Example: (`addon.json`)
 ```
 {
   ...
-  "script": "index.js",
+  "extends": {
+    "script": "index.js",
+  },
   ...
 }
 ```

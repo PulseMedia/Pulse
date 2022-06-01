@@ -10,16 +10,13 @@ Each addon should have his own individual and unique addonId. ([more information
 The main folder should always have the same name as the addonId.  
 
 Depending on the addon-type (skin, script, etc..) you want to create, the folder structure differ.  
-An `addon.json` file is always required it dont matter which addon type you are creating:
+An `addon.json` file is always required:
 
 - 📁 [`<addonId>`](/development/misc/addonid.md)
   - 📰 [`addon.json`](/development/addon/addonjson.md) *required*
   - . . .
 
-We have documented each addon-type and how his folder structure and requiredment are changeing.  
-which type of addon-type do you want to create?  
-
-[filename](type/typeTable.md ':include')
+More information about the `addon.json` can you find [here](/development/addon/addonjson.md)
 
 ---
 ### Quick Start (Github-Template)

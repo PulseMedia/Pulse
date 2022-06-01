@@ -6,6 +6,7 @@
 | [`id` *Required*](#propertie-addonid) | **string** |
 | [`version` *Required*](#propertie-version) | **string** |
 | [`type` *Required*](#propertie-type) | **string** |
+| [`extends` *Required*](#propertie-extends) | **object** |
 | [`meta` *Optional*](#propertie-meta) | **object** |
 | [`dependencies` *Optional*](#propertie-dependencies) | **object** |
 | [`settings` *Optional*](#propertie-settings) | **object** |
@@ -20,6 +21,9 @@ Example: (`addon.json`)
     "name": "Test Addon",
     "description": "This is an Test Addon"
   },
+  "extends": {
+    ...
+  },
   "dependencies": {
     ...
   },
@@ -28,25 +32,33 @@ Example: (`addon.json`)
   }
 }
 ```
-Depending on the defined type in the `addon.json` file, there might be some extra properties that are required or optional.
-For more information see the type propertie info below.
+The content in the 'extends'-object will differ for each addon 'type'
+For more information see the 'type' propertie info below.
 ___
 #### **Propertie:** id
-`string` Unique Id of the Addon , see [AddonID](/development/misc/addonid.md) for more informations.
+> `string` Unique Id of the Addon , see [AddonID](/development/misc/addonid.md) for more informations.
 ___
 #### **Propertie:** version
-`string` Version of the addon, see [Versioning](/development/misc/versioning.md) for more informations.
+> `string` Version of the addon, see [Versioning](/development/misc/versioning.md) for more informations.
 ___
 #### **Propertie:** type
-`string` type of the addon and how it gets managed internally
+> `string` type of the addon and how it gets managed internally
 
-**Note**: the type may affect the `addon.json` file, so that more properties are required.  
-Look at the "AddonJson Properties"-Section in the type you want to create:  
+**Note**: the 'type' affects the 'extends' object! Look at the "ExtendProperties"-Section on the page of the type you want to create   
+
+Available 'type' values:  
 
 [filename](type/typeTable.md ':include')
 ___
+#### **Propertie:** extends
+> `object` Object that holds configurations and data for the AddonType
+
+The content of this object, is different for each AddonType.  
+Look at the 'type'-propertie above for more informations.
+
+___
 #### **Propertie:** meta
-`object` Object that holds meta informations, like name & description of the addon  
+> `object` Object that holds meta informations, like name & description of the addon  
 
 The following keys are available in the meta object: (all are optional)
 
@@ -71,7 +83,7 @@ Example: (`addon.json`)
 ```
 ___
 #### **Propertie:** dependencies
-`object` this Object holts all dependencies where your addon relies on and which are required  
+> `object` this Object holts all dependencies where your addon relies on and which are required  
 
 The keys in this object are the addonIds of the addon and the value is the required min-version:  
 
