@@ -104,17 +104,45 @@
         hook.afterEach(function(html, next) {
           if(html.includes("<p>[ContentTable]</p>")){
             var asHtml = stringToHTML(`<div class="generated">${html}</div>`);
+
+            var titleApiRoute = ""
+            try {
+              console.dir(asHtml.querySelectorAll("div.generated > h1 > a > span")[0]);
+              titleApiRoute = asHtml.querySelectorAll("div.generated > h1 > a > span")[0].innerText + ".";
+            } catch (e) {}
+
             var contentTableHTML = `<hr><h3 id="file-api"><a class="anchor"><span>Table of Contents</span></a></h3>`
 
             var funcTable = "";
 
-            var staticFuncs = asHtml.querySelectorAll("div.generated > div.function > h2 > a");
+            var staticFuncs = asHtml.querySelectorAll("div.generated > div.function");
             for (let i = 0; i < staticFuncs.length; i++) {
-              let item = staticFuncs[i];
-              funcTable += `<tr><td><b class="mathItalicChar">𝑓</b><a href="${item.hash}">${item.innerText.split("(")[0]}</a></td></tr>`
+              let func = staticFuncs[i];
+              let tagContent = "";
+              let title = func.querySelectorAll("h2 > a")[0];
+              let returnVal = `<span style="color: #81a1eb">undefined</span> : `;
+              try {
+                let returns = func.querySelectorAll("h3 + blockquote");
+                for(var x = 0; x < returns.length; x++){
+                  if(returns[x].previousElementSibling.id.includes("returns")){
+                    returnVal = `<span style="color: #81a1eb">` + returns[x].firstElementChild.firstChild.nodeValue.trim() + `</span> : `;
+                    break;
+                  }
+                }
+              } catch (e) {}
+              let multiArgs = false;
+              try {
+                if(title.innerText.split("(")[1].trim().length > 2){
+                  multiArgs = true;
+                }
+              } catch (e) {}
+
+              let funcPath = titleApiRoute + title.innerText.split("(")[0] + `(${multiArgs ? "..." : ""})`;
+
+              funcTable += `<tr><td><b class="mathItalicChar">𝑓</b><a href="${title.hash}">${title.innerText.split("(")[0]}</a></td><td><span style="font-size: 15px; opacity: 0.75;">${returnVal}<code style="color: #939393;">${funcPath}</code></span></td></tr>`
             }
             if(funcTable.length > 0){
-              contentTableHTML += `<table><thead><tr><th>Static Functions</th></tr></thead><tbody>`
+              contentTableHTML += `<table><thead><tr><th>Static Functions</th><th></th></tr></thead><tbody>`
               contentTableHTML += funcTable;
               contentTableHTML += `</tbody></table>`;
             }

@@ -1,16 +1,19 @@
 # Skin Addon
+
+> `"type": "skin"`
+
 ---
-### AddonJson Properties
-Extra properties that are available if your are using the `skin`-value as the type in your addon.json file
+### ExtendProperties
+Properties for the 'extends'-object that are available if your are using the `skin`-value as the type in your `addon.json` file.  
 
 | Key | Type |
 | ------------- | ------------- |
-| [`views` *Required*](#propertie-view) | **string[]** |
+| [`views` *Required*](#extendpropertie-view) | **string[]** |
 
 Look at the [Skinning](/development/skin/structure.md) section for more skinning related informations.
 ___
-#### **Propertie:** view
-`string[]` Used to determine which views are supported in this skin
+#### **ExtendPropertie:** view
+> `string[]` Used to determine which views are supported in this skin
 
 note that not every platform can display each view,  
 eg: Portrait is not available/selectable on an TV also if the skin supports it
@@ -24,11 +27,20 @@ Example: (`addon.json`)
 ```
 {
   ...
-  "view": [ "portrait", "landscape" ],
+  "extends": {
+    "view": [ "portrait", "landscape" ],
+  },
   ...
 }
 ```
 ---
 ### Addon Structure
 Skin addons are not like other "script"-addons, they have his own structures and files.  
+
+- 📁 [`<addonId>`](/development/misc/addonid.md)
+  - 📰 [`addon.json`](/development/addon/addonjson.md) **type="skin"**  
+  ...  
+  - 📁 [`views`](/development/skin/structure.md#views-folder)  
+  ...  
+
 Look at the [Skinning](/development/skin/structure.md) section for more informations.

@@ -4,6 +4,7 @@
 * 📁 JavaScript Api [(api/)](api/) [(docs)](https://pulsemedia.github.io/Pulse/#/contribute/javascript_general)
 * 📁 Platform-related Api [(platforms/)](platforms/) [(docs)](https://pulsemedia.github.io/Pulse/#/contribute/platform_general)
 * 📁 Tools [(tools/)](tools/) [(docs)](https://pulsemedia.github.io/Pulse/#/contribute/tools)
+* 📁 I18N (Languages, ...) [(i18n/)](i18n/) [(docs)](https://pulsemedia.github.io/Pulse/#/contribute/i18n)
 
 Please note that not every part of the App & Platform-related code is OpenSource, we want to guarantee an safe and secure way to use the app.
 

@@ -10,16 +10,13 @@ Each addon should have his own individual and unique addonId. ([more information
 The main folder should always have the same name as the addonId.  
 
 Depending on the addon-type (skin, script, etc..) you want to create, the folder structure differ.  
-An `addon.json` file is always required it dont matter which addon type you are creating:
+An `addon.json` file is always required:
 
 - 📁 [`<addonId>`](/development/misc/addonid.md)
   - 📰 [`addon.json`](/development/addon/addonjson.md) *required*
   - . . .
 
-We have documented each addon-type and how his folder structure and requiredment are changeing.  
-which type of addon-type do you want to create?  
-
-[filename](type/typeTable.md ':include')
+More information about the `addon.json` can you find [here](/development/addon/addonjson.md)
 
 ---
 ### Quick Start (Github-Template)
@@ -36,3 +33,7 @@ If you are creating an public open source addon we strongly recommend to add the
 `pulse-player-addon`  
 
 All Repositories with this tag can be found [here](https://github.com/topics/pulse-player-addon)
+
+---
+### Translate your addon
+More informations about Addon translations can be found [here](/development/addon/addonLang.md)

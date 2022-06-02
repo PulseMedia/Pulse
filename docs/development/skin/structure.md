@@ -14,12 +14,13 @@ ___
 ### audio Folder
 The audio folder contains UI Sounds used by the skin.
 
-Added the following files to the folder (If file doesnt exists, nothing is been played)  
+The following file names are used: (If file doesnt exists, nothing is been played)  
 
-- 📁 audio
-  - 📰 `click.mp3`
-  - 📰 `context.mp3`
-  - 📰 `notification.mp3`
+| 📁 audio | |
+| ------------- | ------------- |
+| `click.mp3` | |
+| `context.mp3` | |
+| `notification.mp3` | |
 
 **Note**: Currently only `.mp3` is supported, this will be changed in the future
 ___
@@ -29,7 +30,7 @@ The fonts folder contains all used fonts of the skin.
 All fonts gets loaded from an `@Font.css`-file.
 
 - 📁 fonts
-  - 📰 `@Font.css`
+  - 📰 `@Font.css` **required**
   - 📰 `Roboto-Light.ttf` *example*
   - 📰 `Roboto-Medium.ttf` *example*
   - 📰 `Roboto-Black.ttf` *example*
@@ -58,7 +59,8 @@ All fonts gets loaded from an `@Font.css`-file.
 }
 
 ```
-The font can than be used in skin with with the `font-family` property. With the  font-family value defined in the font-face.
+The font can then be used in skin with the `font-family` property.  
+`font-family` values are defined in the font-face of the `@Font.css`-file.  
 eg: `font-family: 'Roboto';`  
 For more informations about visit the [mdn web docs (@font-face)](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face).
 ___

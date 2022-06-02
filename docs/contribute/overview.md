@@ -1,5 +1,4 @@
 # Contribute
-##### **Always merge into the `development` branch**
 There are several types and ways to contribute, you can contribute to the raw javascript api up to native platform functions  
 
 | Type of Contribution | Repository path |
@@ -17,7 +16,7 @@ ___
 | ------------- | ------------- |
 | **main**  | Content in this branch is equal to the current app release/version |
 | **development**  | Merge your Changes, Ideas and other things in this branch ! |
-| **< ... >**  | Big Projects/Changes may have his own individual branch, merge changes related to that in the corresponding branch |
+| **< ... >**  | Big Additions/Changes may have his own individual branch, merge changes related to that in the corresponding branch, or create it |
 ___
 ### Before Contributing
 Before you are doing any Contributions we recommend to read the [Guidelines](/contribute/guidelines.md) and our [Code of Conduct](/contribute/code_of_conduct.md)  
