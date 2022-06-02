@@ -3,6 +3,8 @@
 - [Compatibility Table](/start/compatiblity_table.md)
 
 ##### AddonAPI
+- App
+  - [I18N](/api/app_i18n.md)
 - GUI
   - [App](/api/gui_app.md)
   - [Windows](/api/gui_window.md)
@@ -21,7 +23,8 @@
 ##### Development
 - Addon
   - [Development](/development/addon/development.md)
-  - [AddonJson](/development/addon/addonjson.md)
+  - [Addon Json](/development/addon/addonjson.md)
+  - [Addon Lang](/development/addon/addonLang.md)
   - [Addon Types](/development/addon/type/overview.md)
     - [Script](/development/addon/type/script.md)
     - [Skin](/development/addon/type/skin.md)
@@ -40,6 +43,7 @@
 - Miscellaneous
   - [AddonID](/development/misc/addonid.md)
   - [Versioning](/development/misc/versioning.md)
+  - [I18N](/development/misc/i18n.md)
 
 ##### Contribute ❤️
 - Getting Started
@@ -51,6 +55,6 @@
   - [Package Structure](/contribute/javascript.md)
 - Platform
   - [General](/contribute/platform_general.md)
+- [Translations](/contribute/translations.md)  
 - [Docs](/contribute/docs.md)
 - [Tools](/contribute/tools.md)
-- [Debug](/contribute/debug.md)

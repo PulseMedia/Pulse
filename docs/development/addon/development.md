@@ -33,3 +33,7 @@ If you are creating an public open source addon we strongly recommend to add the
 `pulse-player-addon`  
 
 All Repositories with this tag can be found [here](https://github.com/topics/pulse-player-addon)
+
+---
+### Translate your addon
+More informations about Addon translations can be found [here](/development/addon/addonLang.md)

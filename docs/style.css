@@ -681,7 +681,7 @@ body {
 
 .markdown-section figure,
 .markdown-section p,
-.markdown-section ul,
+.markdown-section > ul,
 .markdown-section ol {
   margin: 1.2em 0;
 }

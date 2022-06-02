@@ -2,8 +2,7 @@
    "languages":[
       {
          "name":"English (BuiltIn)",
-         "code":"en_us",
-         "builtin":true
+         "code":"en_US"
       }
    ]
 }
