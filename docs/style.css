@@ -887,6 +887,19 @@ input[type='search'] {
   position: relative;
 }
 
+.supportTable div.vert{
+  width: 250px;
+  height: 39px;
+  padding-top: 9px;
+}
+
+
+.supportTable div.vert b{
+  font-size: 16px;
+  font-weight: 600;
+  margin-left: 50px;
+}
+
 .supportTable div:last-of-type{
   border-right: none;
 }
@@ -922,6 +935,10 @@ input[type='search'] {
   height: 16px;
   background: #b53333;
   border-radius: 50%;
+}
+
+.supportTable div.vert::after{
+  bottom: 11px;
 }
 
 .supportTable div.supported::after{

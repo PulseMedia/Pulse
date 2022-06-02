@@ -1,10 +1,18 @@
 # Compatibility Table
 
-Each Function or Api that has individual platform implementations has a "Compatibility Table".
-The "Compatibility Table" displays a green dot if the function is supported or a red dot if it's not supported on that platform
+Each Function or Api that has individual platform implementations has a "Compatibility Table".  
+The "Compatibility Table" displays a green dot if the function is supported or a red dot if it's not supported on that platform.
+
+Functions that are independent of an platform implementations will showing an "Platform Independent" notice at the "Compatibility Table".  
+These functions will work on all plaforms.
 
 #### Example:
+> Platform implementations:
 [Supports(0,2,4,6,8,10)]
+
+> Independent implementations:
+[Supports(JSAPI)]
+
 
 <br/><br/>
 

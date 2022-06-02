@@ -53,18 +53,22 @@
   }
 
   function renderSupportTable(platforms){
-    var content = ""
-    var count = 0;
-    for(var key in window.platformIds){
-      content += `<div class="${(platforms[0] === "*" || platforms.includes(key)) ? "supported" : ""}" style="--svg-color: ${window.platformIds[key].color}"><span>${window.platformIds[key].name}</span>${window.platformIds[key].icon}</div>`
-      if(platforms.includes(key)){
-        count++;
+    if(platforms[0] === "JSAPI"){
+      return `<div class='supportTable full'><div class="supported vert"><b>Platform Independent</b></div></div>`
+    } else {
+      var content = ""
+      var count = 0;
+      for(var key in window.platformIds){
+        content += `<div class="${(platforms[0] === "*" || platforms.includes(key)) ? "supported" : ""}" style="--svg-color: ${window.platformIds[key].color}"><span>${window.platformIds[key].name}</span>${window.platformIds[key].icon}</div>`
+        if(platforms.includes(key)){
+          count++;
+        }
       }
+      if(count == Object.keys(window.platformIds).length || platforms[0] === "*"){
+        return "<div class='supportTable full'>" + content + "</div>"
+      }
+      return "<div class='supportTable'>" + content + "</div>"
     }
-    if(count == Object.keys(window.platformIds).length || platforms[0] === "*"){
-      return "<div class='supportTable full'>" + content + "</div>"
-    }
-    return "<div class='supportTable'>" + content + "</div>"
   }
 
   function stringToHTML(htmlString) {
@@ -89,6 +93,8 @@
         hook.beforeEach(function(content) {
           return content.replace(/\[Supports\(([0-9,*]*)\)\]/gm, (key, occur) => {
             return renderSupportTable(occur.split(",").map(e => e.trim()));
+          }).replace(/\[Supports\(JSAPI\)\]/gm, (key, occur) => {
+            return renderSupportTable([ "JSAPI" ]);
           }).replaceAll("[Function]", `<div class="function">`)
             .replaceAll("[/Function]", `</div>`)
             .replaceAll("[Property]", `<div class="function serve">`)

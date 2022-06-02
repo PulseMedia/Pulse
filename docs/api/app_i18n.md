@@ -18,7 +18,7 @@ I18N.getCode()
 ```
 
 ### Compatibility
-[Supports(*)]
+[Supports(JSAPI)]
 
 [/Function]
 
@@ -35,7 +35,7 @@ I18N.getName()
 ```
 
 ### Compatibility
-[Supports(*)]
+[Supports(JSAPI)]
 
 [/Function]
 
@@ -61,7 +61,7 @@ I18N.translate("langKeyData", { variable: "value", ... });
 ```
 
 ### Compatibility
-[Supports(*)]
+[Supports(JSAPI)]
 
 [/Function]
 
@@ -89,7 +89,7 @@ I18N.createBBCode("langKeyData", { variable: "value", ... });
 ```
 
 ### Compatibility
-[Supports(*)]
+[Supports(JSAPI)]
 
 [/Function]
 
@@ -117,7 +117,7 @@ I18N.translate("my.addon.id", "langKeyData", { variable: "value", ... });
 ```
 
 ### Compatibility
-[Supports(*)]
+[Supports(JSAPI)]
 
 [/Function]
 
@@ -147,6 +147,6 @@ I18N.createBBCodeAddon("my.addon.id", "langKeyData", { variable: "value", ... })
 ```
 
 ### Compatibility
-[Supports(*)]
+[Supports(JSAPI)]
 
 [/Function]

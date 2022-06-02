@@ -31,7 +31,7 @@ Path.combine("HOME://", "addons", "my.addon.id")
 
 
 ### Compatibility
-[Supports(*)]
+[Supports(JSAPI)]
 
 [/Function]
 
@@ -53,6 +53,6 @@ Path.translate("HOME://addons/my.addon.id")
 ```
 
 ### Compatibility
-[Supports(*)]
+[Supports(JSAPI)]
 
 [/Function]
