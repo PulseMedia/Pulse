@@ -4,8 +4,11 @@
 
 [Function]
 
-## getCode()
-Get the current used language code
+## code
+
+*Property*
+
+Returns the current used language code
 
 > **Language code format: `<ISO-639-1(Alpha-2)>_<ISO 3166-1(Alpha-2)>`** **eg: `en_US`**
 
@@ -14,7 +17,7 @@ Get the current used language code
 > String **Current App language code**
 
 ```js
-I18N.getCode()
+var currentLangCode = I18N.code;
 ```
 
 ### Compatibility
@@ -24,14 +27,17 @@ I18N.getCode()
 
 [Function]
 
-## getName()
-Get the current used language name
+## name
+
+*Property*
+
+Returns the current used language name
 
 ### Returns
 > String **Current App language name**
 
 ```js
-I18N.getName()
+var currentLangName = I18N.name;
 ```
 
 ### Compatibility

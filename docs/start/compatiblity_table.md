@@ -6,6 +6,9 @@ The "Compatibility Table" displays a green dot if the function is supported or a
 Functions that are independent of an platform implementations will showing an "Platform Independent" notice at the "Compatibility Table".  
 These functions will work on all plaforms.
 
+Additionally to some "Platform Independent"-function an "Different Results" value will be displayed, this means that the function will work on all platform,  
+but will return different values on some platforms
+
 #### Example:
 > Platform implementations:
 [Supports(0,2,4,6,8,10)]
@@ -13,6 +16,8 @@ These functions will work on all plaforms.
 > Independent implementations:
 [Supports(JSAPI)]
 
+> Independent implementations but platform dependent results:
+[Supports(JSAPIDIFF)]
 
 <br/><br/>
 

@@ -7,6 +7,7 @@ There are several types and ways to contribute, you can contribute to the raw ja
 | [Platforms](/contribute/platform_general.md)  | [`/platforms`](https://github.com/PulseMedia/Pulse/tree/main/platforms) |
 | [Tools](/contribute/tools.md)  | [`/tools`](https://github.com/PulseMedia/Pulse/tree/main/tools) |
 | [Documentation](/contribute/docs.md)  | [`/docs`](https://github.com/PulseMedia/Pulse/tree/main/docs) |
+| [Translation](/contribute/translations.md)  | [`/i18n`](https://github.com/PulseMedia/Pulse/tree/main/i18n) |
 | [**Submit a Bug or an Feature request**](https://github.com/PulseMedia/Pulse/issues)  | |
 
 We are happy for every Contribution up to any Bug report, which will Improve the App in any way.

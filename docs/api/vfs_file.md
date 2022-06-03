@@ -4,31 +4,6 @@
 
 [Function]
 
-## existsFile(String)
-
-*Async*
-
-Checks if the file with the given path exists
-
-### Parameter
-> *path* String
-
-
-### Returns
-> Boolean **True if file exists**
-
-```js
-await File.existsFile("<path>")
-```
-
-### Compatibility
-[Supports(*)]
-
-[/Function]
-
-
-[Function]
-
 ## readFile(String)
 
 *Async*
@@ -50,7 +25,6 @@ await File.readFile("<path>")
 [Supports(*)]
 
 [/Function]
-
 
 [Function]
 
@@ -77,6 +51,30 @@ await File.writeFile("<path>", "<content>")
 
 [/Function]
 
+[Function]
+
+## appendFile(String, String)
+
+*Async*
+
+Appends content to the file at the given path
+
+### Parameter
+> *path* String
+
+> *content* String
+
+### Returns
+> Boolean **True on success**
+
+```js
+await File.appendFile("<path>", "<content>")
+```
+
+### Compatibility
+[Supports(*)]
+
+[/Function]
 
 [Function]
 
@@ -90,7 +88,7 @@ Deletes the file at the given path
 > *path* String
 
 ### Returns
-> String **True on success**
+> Boolean **True on success**
 
 ```js
 await File.deleteFile("<path>")
@@ -100,6 +98,42 @@ await File.deleteFile("<path>")
 [Supports(*)]
 
 [/Function]
+
+
+[Function]
+
+## existsFile(String)
+
+*Async*
+
+Checks if the file with the given path exists
+
+### Parameter
+> *path* String
+
+### Returns
+> Boolean **True if file exists**
+
+```js
+await File.existsFile("<path>")
+```
+
+### Compatibility
+[Supports(*)]
+
+[/Function]
+
+
+
+
+
+
+
+
+
+
+
+
 
 [RepresentationClass]
 
@@ -124,9 +158,11 @@ var myFile = new VFS.File("<path>")
 
 *Property*
 
-```js
-var filePath = myFile.path;
-```
+### Returns
+> String **current path**
+
+### Set
+> String **change the current path**
 
 [/Property]
 
@@ -135,10 +171,6 @@ var filePath = myFile.path;
 ## exists()
 
 *Async*
-
-```js
-var doesExist = await myFile.exists();
-```
 
 [/Function]
 
@@ -149,10 +181,6 @@ var doesExist = await myFile.exists();
 
 *Async*
 
-```js
-var fileContent = await myFile.read();
-```
-
 [/Function]
 
 
@@ -161,10 +189,6 @@ var fileContent = await myFile.read();
 ## delete()
 
 *Async*
-
-```js
-var wasDeleted = await myFile.delete();
-```
 
 [/Function]
 
@@ -178,11 +202,18 @@ var wasDeleted = await myFile.delete();
 ### Parameter
 > *content* String
 
-```js
-var wasWritten = await myFile.write("<content>");
-```
-
 [/Function]
 
+
+[Function]
+
+## append(String)
+
+*Async*
+
+### Parameter
+> *content* String
+
+[/Function]
 
 [/RepresentationClass]

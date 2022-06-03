@@ -5,6 +5,7 @@
 ##### AddonAPI
 - App
   - [I18N](/api/app_i18n.md)
+  - [Util](/api/app_util.md)
 - GUI
   - [App](/api/gui_app.md)
   - [Windows](/api/gui_window.md)

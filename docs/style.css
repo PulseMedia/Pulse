@@ -482,6 +482,19 @@ body.close .content {
     -webkit-animation: octocat-wave 560ms ease-in-out;
             animation: octocat-wave 560ms ease-in-out;
   }
+  .function > p > em {
+    float: unset !important;
+    margin-left: 20px !important;
+  }
+  .markdown-section > h1,
+  .markdown-section > h2,
+  .markdown-section > h3,
+  .markdown-section > h4,
+  .markdown-section > h5,
+  .markdown-section > p {
+    margin-left: 10px !important;
+    padding-right: 10px;
+  }
 }
 @-webkit-keyframes octocat-wave {
   0%, 100% {
@@ -712,21 +725,33 @@ body {
   color: #7f8c8d;
 }
 .markdown-section code {
-  background-color: #282828;
+  background-color: #0d0e12;
   border-radius: 2px;
-  color: #657b83;
+  color: rgba(71, 238, 255, 0.55);
+  font-weight: 400 !important;
+  border: 1px solid rgba(71, 238, 255,0.1);
   font-family: 'JetBrains Mono', Monaco, courier, monospace;
   margin: 0 2px;
   padding: 3px 5px;
   white-space: pre-wrap;
 }
+
+.markdown-section pre code{
+  border: none;
+  font-weight: unset !important;
+}
+
+.markdown-section table code{
+  border-color: #ffffff30;
+}
+
 .markdown-section > :not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) code {
   font-size: 0.8rem;
 }
 .markdown-section pre {
   -moz-osx-font-smoothing: initial;
   -webkit-font-smoothing: initial;
-  background-color: #282828;
+  background-color: #0d0e12;
   font-family: 'JetBrains Mono', Monaco, courier, monospace;
   line-height: 1.5rem;
   margin: 1.2em 0;
@@ -734,6 +759,8 @@ body {
   padding: 0 1.4rem;
   position: relative;
   word-wrap: normal;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 5px;
 }
 /* code highlight */
 .token.comment,
@@ -814,7 +841,7 @@ body {
 .markdown-section pre > code {
   -moz-osx-font-smoothing: initial;
   -webkit-font-smoothing: initial;
-  background-color: #282828;
+  background-color: #0d0e12;
   border-radius: 2px;
   color: #657b83;
   display: block;
@@ -943,6 +970,10 @@ input[type='search'] {
 
 .supportTable div.supported::after{
   background: #36b33a;
+}
+
+.supportTable div.supported.blue::after{
+  background: #398fed;
 }
 
 .sidebar{
@@ -1081,6 +1112,25 @@ div.repclass > div.function{
   border-left: none;
   border-right: none;
   border-bottom: none;
+  font-size: 20px !important;
+  padding-bottom: 1px;
+}
+
+div.repclass > div.function h2{
+  padding-top: 1px;
+  font-size: 20px;
+}
+
+div.repclass > div.function h3{
+  font-size: 18px;
+}
+
+div.repclass > div.function h3:first-of-type {
+    margin-top: 15px !important;
+}
+
+div.repclass > div.function blockquote{
+  font-size: 16px !important;
 }
 
 div.class > div.function{
@@ -1211,6 +1261,7 @@ div.function blockquote strong{
 div.function blockquote code{
   padding: 3px 6px;
   color: #7e2cc9;
+  border: 1px solid #7e2cc94f;
   border-radius: 5px;
   background: rgba(0,0,0,0.2);
 }
@@ -1224,9 +1275,11 @@ div.function pre{
   width: calc(100% + 40px);
   margin-top: 40px;
   margin-bottom: 20px;
+  border: none;
   border-top: 1px solid rgba(255,255,255,0.05);
   border-bottom: 1px solid rgba(255,255,255,0.05);
   color: #c9cfce;
+  border-radius: 0px;
 }
 div.function pre, div.function code{
   background: #1d1e24;
@@ -1284,6 +1337,12 @@ tr td a.TOCClassConstructor{
   color: #dea8ff !important;
 }
 
+.function > p > em[tagcontent="Function"]{
+  background: #04180b;
+  border: 1px solid #1f7244;
+  color: #00cd88 !important;
+}
+
 .function > p > em[tagcontent="Property"]{
   background: #2e260c;
   border: 1px solid #bd951c;
@@ -1314,6 +1373,47 @@ tr td a.TOCClassConstructor{
 
 .function > p > em[tagcontent="Setter"]::before{
   content: "𝑝";
+}
+
+.function blockquote > pre{
+  margin-top: 0;
+  background: none;
+  border: none;
+  padding-left: 10px;
+}
+
+.function blockquote > pre::after{
+  content: "";
+}
+
+.function blockquote > pre > code {
+  color: #9f2ff5;
+}
+
+.function blockquote > pre > code span:first-child{
+  color: #81a1eb;
+  font-weight: 700;
+  padding-bottom: 20px;
+}
+
+.propTypeGet{
+  font-size: 15px;
+  margin-right: 10px;
+  padding: 3px 8px;
+  background: rgba(0,0,0,0.25);
+  color: #c49b29;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 3px;
+}
+
+.propTypeSet{
+  font-size: 15px;
+  margin-right: 10px;
+  padding: 3px 8px;
+  background: rgba(0,0,0,0.25);
+  color: #398fed;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 3px;
 }
 
 tr td a.TOCClassFunc.property{

@@ -1,4 +1,13 @@
 const map = {
+  "EXISTS_DIRECTORY": {
+    args: [ "STRING" ]
+  },
+  "CREATE_DIRECTORY": {
+    args: [ "STRING" ]
+  },
+  "DELETE_DIRECTORY": {
+    args: [ "STRING" ]
+  },
   "READ_DIRECTORY": {
     args: [ "STRING" ],
     after: (val) => {
@@ -8,17 +17,8 @@ const map = {
         }
         return val;
       }
-      return {};
+      return { dirs: [], files: [] };
     }
-  },
-  "CREATE_DIRECTORY": {
-    args: [ "STRING" ]
-  },
-  "DELETE_DIRECTORY": {
-    args: [ "STRING" ]
-  },
-  "EXISTS_DIRECTORY": {
-    args: [ "STRING" ]
   }
 }
 

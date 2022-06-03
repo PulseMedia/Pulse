@@ -8,7 +8,7 @@ To add languages to your addon you need to define an fallback language that will
 Just add the `fallbackLanguage`-key to the `extends`-object in the `addon.json`-file.
 
 Example: (`addon.json`)
-```
+```json
 {
   ...
   "extends": {

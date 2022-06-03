@@ -1,11 +1,11 @@
 # Addon ID
 
-Pulse uses a addonId's to identify addons.
+Pulse uses addonId's to identify addons.
 ___
 ### Structure
 The addonId is the unique identifier.  
 It must be unique, and must use only lowercase characters and dots.  
-This identifier should also be used as the name of the folder that contains the add-on.  
+This identifier must also be used as the name of the folder that contains the add-on.  
 
 We recommend to use the following parts in your addonId:  
 
@@ -21,7 +21,7 @@ Example for the `addon.json` file:
 ```json
 {
   ...
-  "AddonID": "script.example.addon",
+  "id": "script.example.addon",
   ...
 }
 ```

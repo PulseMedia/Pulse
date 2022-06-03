@@ -30,7 +30,7 @@ Example for the `addon.json` file:
 ```json
 {
   ...
-  "Version": "1.3.8",
+  "version": "1.3.8",
   ...
 }
 ```

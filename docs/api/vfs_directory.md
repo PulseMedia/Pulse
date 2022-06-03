@@ -5,6 +5,9 @@
 [Function]
 
 ## existsDirectory(String)
+
+*Async*
+
 Checks if the directory with the given path exists
 
 ### Parameter
@@ -15,7 +18,7 @@ Checks if the directory with the given path exists
 > Boolean **True if directory exists**
 
 ```js
-Directory.existsDirectory("<path>")
+var doesExist = await Directory.existsDirectory("<path>")
 ```
 
 ### Compatibility
@@ -27,6 +30,9 @@ Directory.existsDirectory("<path>")
 [Function]
 
 ## createDirectory(String)
+
+*Async*
+
 Creates an directory at the given path
 
 ### Parameter
@@ -36,7 +42,7 @@ Creates an directory at the given path
 > Boolean **True on success**
 
 ```js
-Directory.createDirectory("<path>")
+var wasCreated = await Directory.createDirectory("<path>")
 ```
 
 ### Compatibility
@@ -48,6 +54,9 @@ Directory.createDirectory("<path>")
 [Function]
 
 ## deleteDirectory(String)
+
+*Async*
+
 Deletes the directory at the given path
 
 ### Parameter
@@ -57,13 +66,49 @@ Deletes the directory at the given path
 > String **True on success**
 
 ```js
-Directory.deleteDirectory("<path>")
+var wasDeleted = await Directory.deleteDirectory("<path>")
 ```
 
 ### Compatibility
 [Supports(*)]
 
 [/Function]
+
+
+[Function]
+
+## readDirectory(String)
+
+*Async*
+
+Read the content of the directory at the given path
+
+### Parameter
+> *path* String
+
+### Returns
+> DirectoryObject (Object)
+> ```javascript
+  "DirectoryObject" {
+    dirs: [], //Array of strings - directory names
+    files: [], //Array of strings - file names
+    all: [], //Array of strings - dirs & files together
+  }
+> ```
+
+```js
+var dirContent = await Directory.readDirectory("<path>");
+```
+
+### Compatibility
+[Supports(*)]
+
+[/Function]
+
+
+
+
+
 
 
 [RepresentationClass]
@@ -81,40 +126,50 @@ var myDirectory = new VFS.Directory("<path>")
 
 [/Function]
 
+[Property]
+
+## path
+
+*Property*
+
+### Returns
+> String **current path**
+
+### Set
+> String **change the current path**
+
+[/Property]
+
 [Function]
 
 ## exists()
 
-```js
-var doesExist = await myDirectory.exists();
-```
+*Async*
 
 [/Function]
-
 
 [Function]
 
 ## create()
 
-### Parameter
-> *content* String
-
-```js
-var wasCreated = await myDirectory.create();
-```
+*Async*
 
 [/Function]
-
 
 [Function]
 
 ## delete()
 
-```js
-var wasDeleted = await myDirectory.delete();
-```
+*Async*
 
 [/Function]
 
+[Function]
+
+## read()
+
+*Async*
+
+[/Function]
 
 [/RepresentationClass]
