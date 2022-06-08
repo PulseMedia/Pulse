@@ -1,4 +1,9 @@
 # Pulse
+
+```diff
+- App is currently in ClosedAlpha (no public useage)
+```
+
 **This repository includes the following development content for Pulse**
 * 📁 Development Documentation [(docs/)](docs/) [(visit)](https://pulsemedia.github.io/Pulse/)
 * 📁 JavaScript Api [(api/)](api/) [(docs)](https://pulsemedia.github.io/Pulse/#/contribute/javascript_general)
