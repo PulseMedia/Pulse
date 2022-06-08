@@ -2,7 +2,74 @@
 
 [ContentTable]
 
+[Function]
 
+## versionGreaterThan(String, String)
+Check if an version is greater than another
+
+
+### Parameter
+> *version* String
+
+> *otherVersion* String
+
+### Returns
+> Boolean **If arg[0] version is greater than arg[1] version**
+
+```js
+var isGreater = Util.versionGreaterThan("<version>", "<otherVersion>");
+```
+
+### Compatibility
+[Supports(JSAPI)]
+
+[/Function]
+
+[Function]
+
+## versionLowerThan(String, String)
+Check if an version is lower than another
+
+
+### Parameter
+> *version* String
+
+> *otherVersion* String
+
+### Returns
+> Boolean **If arg[0] version is lower than arg[1] version**
+
+```js
+var isLower = Util.versionLowerThan("<version>", "<otherVersion>");
+```
+
+### Compatibility
+[Supports(JSAPI)]
+
+[/Function]
+
+[Function]
+
+## versionGreaterOrEqualsThan(String, String)
+Check if an version is greater or equals than another
+
+
+### Parameter
+> *version* String
+
+> *otherVersion* String
+
+### Returns
+> Boolean **If arg[0] version is greater or equals than arg[1] version**
+
+```js
+var isGreaterOrEquals = Util.versionGreaterOrEqualsThan("<version>", "<otherVersion>");
+```
+
+### Compatibility
+[Supports(JSAPI)]
+
+[/Function]
 
 [Class]
 
@@ -15,17 +82,20 @@
 *CONSTRUCTOR*
 
 ### Parameter
-> *path* String
+> *version* String
 
 ```js
 var myVersion = new Util.Version("<version>")
 ```
 
+### Compatibility
+[Supports(JSAPI)]
+
 [/Function]
 
 [Function]
 
-## isHigherThan(String)
+## isGreaterThan(String)
 
 Check if the version is higher than the given version in the argument
 
@@ -36,8 +106,11 @@ Check if the version is higher than the given version in the argument
 > Boolean **True if is higher than the given version**
 
 ```js
-var myVersionIsHigher = myVersion.isHigherThan("<other_version>")
+var myVersionIsGreater = myVersion.isGreaterThan("<other_version>")
 ```
+
+### Compatibility
+[Supports(JSAPI)]
 
 [/Function]
 
@@ -57,11 +130,14 @@ Check if the version is lower than the given version in the argument
 var myVersionIsLower = myVersion.isLowerThan("<other_version>")
 ```
 
+### Compatibility
+[Supports(JSAPI)]
+
 [/Function]
 
 [Function]
 
-## isHigherOrEqualsThan(String)
+## isGreaterOrEqualsThan(String)
 
 Check if the version is higher or equals the given version in the argument
 
@@ -72,8 +148,11 @@ Check if the version is higher or equals the given version in the argument
 > Boolean **True if is higher or equals than the given version**
 
 ```js
-var myVersionIsHigherOrEquals = myVersion.isHigherOrEqualsThan("<other_version>")
+var myVersionIsGreaterOrEquals = myVersion.isGreaterOrEqualsThan("<other_version>")
 ```
+
+### Compatibility
+[Supports(JSAPI)]
 
 [/Function]
 

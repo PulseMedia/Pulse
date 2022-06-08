@@ -18,7 +18,7 @@ Reads the content of the file at the given path
 > String **Content of the file**
 
 ```js
-await File.readFile("<path>")
+var fileContent = await File.readFile("<path>")
 ```
 
 ### Compatibility
@@ -43,7 +43,7 @@ Writes content to the file at the given path
 > Boolean **True on success**
 
 ```js
-await File.writeFile("<path>", "<content>")
+var wasWritten = await File.writeFile("<path>", "<content>")
 ```
 
 ### Compatibility
@@ -68,7 +68,7 @@ Appends content to the file at the given path
 > Boolean **True on success**
 
 ```js
-await File.appendFile("<path>", "<content>")
+var wasAppended = await File.appendFile("<path>", "<content>")
 ```
 
 ### Compatibility
@@ -91,7 +91,7 @@ Deletes the file at the given path
 > Boolean **True on success**
 
 ```js
-await File.deleteFile("<path>")
+var wasDeleted = await File.deleteFile("<path>")
 ```
 
 ### Compatibility
@@ -115,7 +115,7 @@ Checks if the file with the given path exists
 > Boolean **True if file exists**
 
 ```js
-await File.existsFile("<path>")
+var doesExist = await File.existsFile("<path>")
 ```
 
 ### Compatibility

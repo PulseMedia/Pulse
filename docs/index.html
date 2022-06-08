@@ -34,6 +34,9 @@
     if(platforms[0] === "JSAPIDIFF"){
       return `<div class='supportTable full'><div class="supported vert"><b>Platform Independent</b></div><div class="supported vert blue"><b>Different Results</b></div></div>`
     }
+    if(platforms[0] === "JSAPIACTION"){
+      return `<div class='supportTable full'><div class="supported vert"><b>Platform Independent</b></div><div class="supported vert violet"><b>Different Action</b></div></div>`
+    }
     var content = ""
     var count = 0;
     for(var key in window.platformIds){
@@ -75,6 +78,8 @@
             return renderSupportTable([ "JSAPI" ]);
           }).replace(/\[Supports\(JSAPIDIFF\)\]/gm, (key, occur) => {
             return renderSupportTable([ "JSAPIDIFF" ]);
+          }).replace(/\[Supports\(JSAPIACTION\)\]/gm, (key, occur) => {
+            return renderSupportTable([ "JSAPIACTION" ]);
           }).replaceAll("[Function]", `<div class="function">`)
             .replaceAll("[/Function]", `</div>`)
             .replaceAll("[Property]", `<div class="function property">`)

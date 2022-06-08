@@ -10,9 +10,9 @@ export class Version{
     });
   }
 
-  isHigherThan(otherVersion){
+  isGreaterThan(otherVersion){
     if (typeof otherVersion === 'string' || otherVersion instanceof String){
-      return this.isHigherThan(new Version(otherVersion));
+      return this.isGreaterThan(new Version(otherVersion));
     }
     if(otherVersion.constructor === Version){
       var currNum, selfNum;
@@ -35,19 +35,38 @@ export class Version{
       }
       return false;
     }
-    throw {
-      name: "VersionException",
-      message: "Passed object is not an Version-Object"
-    }
   }
 
   isLowerThan(otherVersion){
-    return !this.isHigherThan(otherVersion);
+    if (typeof otherVersion === 'string' || otherVersion instanceof String){
+      return this.isLowerThan(new Version(otherVersion));
+    }
+    if(otherVersion.constructor === Version){
+      var currNum, selfNum;
+      var lengthLopp = this.versionData.length;
+      if(otherVersion.versionData.length > lengthLopp){
+        lengthLopp = otherVersion.versionData.length;
+      }
+      for(let i = 0; i < lengthLopp; i++){
+        currNum = otherVersion.versionData[i];
+        selfNum = this.versionData[i];
+        if(currNum != undefined && selfNum != undefined){
+          if(selfNum < currNum){
+            return true;
+          }
+        } else {
+          if(selfNum == undefined && !(currNum === 0)){
+            return true;
+          }
+        }
+      }
+      return false;
+    }
   }
 
-  isHigherOrEqualsThan(otherVersion){
+  isGreaterOrEqualsThan(otherVersion){
     if (typeof otherVersion === 'string' || otherVersion instanceof String){
-      return this.isHigherOrEqualsThan(new Version(otherVersion));
+      return this.isGreaterOrEqualsThan(new Version(otherVersion));
     }
     if(otherVersion.constructor === Version){
       var currNum, selfNum;
@@ -76,10 +95,6 @@ export class Version{
         }
       }
       return isHigher;
-    }
-    throw {
-      name: "VersionException",
-      message: "Passed object is not an Version-Object"
     }
   }
 
